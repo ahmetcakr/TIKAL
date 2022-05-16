@@ -8,7 +8,7 @@ object uAna: TuAna
   FormFactor.Height = 900
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
-  DesignerMasterStyle = 0
+  DesignerMasterStyle = 3
   object toolbar_baslik: TToolBar
     Anchors = []
     Size.Width = 384.000000000000000000
@@ -340,7 +340,7 @@ object uAna: TuAna
           FileName = 'C:\Users\ahmet\Downloads\icons8-home-50.png'
         end>
       IsSelected = True
-      Size.Width = 95.000000000000000000
+      Size.Width = 96.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'tabitemcustom'
@@ -356,7 +356,7 @@ object uAna: TuAna
         TabOrder = 0
         ParentShowHint = False
         ShowHint = False
-        Viewport.Width = 368.000000000000000000
+        Viewport.Width = 379.000000000000000000
         Viewport.Height = 470.000000000000000000
         object urunBir: TRectangle
           Margins.Left = 25.000000000000000000
@@ -392,7 +392,7 @@ object uAna: TuAna
               ImageIndex = 0
             end
           end
-          object Layout2: TLayout
+          object lo_urunBirOrta: TLayout
             Align = Top
             Position.Y = 121.000000000000000000
             Size.Width = 144.000000000000000000
@@ -410,7 +410,7 @@ object uAna: TuAna
               TabOrder = 0
             end
           end
-          object Layout13: TLayout
+          object lo_urunBirAlt: TLayout
             Align = Top
             Position.Y = 169.000000000000000000
             Size.Width = 144.000000000000000000
@@ -1146,8 +1146,14 @@ object uAna: TuAna
             Size.Height = 121.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
+            object Glyph2: TGlyph
+              Align = Client
+              Size.Width = 144.000000000000000000
+              Size.Height = 121.000000000000000000
+              Size.PlatformDefault = False
+            end
           end
-          object Layout4: TLayout
+          object lo_urunIkiAlt: TLayout
             Align = Top
             Position.Y = 169.000000000000000000
             Size.Width = 144.000000000000000000
@@ -1856,7 +1862,7 @@ object uAna: TuAna
               TabOrder = 3
             end
           end
-          object Layout14: TLayout
+          object lo_urunIkiOrta: TLayout
             Align = Top
             Position.Y = 121.000000000000000000
             Size.Width = 144.000000000000000000
@@ -1908,7 +1914,7 @@ object uAna: TuAna
               Size.PlatformDefault = False
             end
           end
-          object Layout6: TLayout
+          object lo_urunUcAlt: TLayout
             Align = Top
             Position.Y = 169.000000000000000000
             Size.Width = 144.000000000000000000
@@ -2617,7 +2623,7 @@ object uAna: TuAna
               TabOrder = 3
             end
           end
-          object Layout15: TLayout
+          object lo_urunUcOrta: TLayout
             Align = Top
             Position.Y = 121.000000000000000000
             Size.Width = 144.000000000000000000
@@ -2669,7 +2675,7 @@ object uAna: TuAna
               Size.PlatformDefault = False
             end
           end
-          object Layout8: TLayout
+          object lo_urunDortAlt: TLayout
             Align = Top
             Position.Y = 169.000000000000000000
             Size.Width = 144.000000000000000000
@@ -3378,7 +3384,7 @@ object uAna: TuAna
               TabOrder = 3
             end
           end
-          object Layout16: TLayout
+          object lo_urunDortOrta: TLayout
             Align = Top
             Position.Y = 121.000000000000000000
             Size.Width = 144.000000000000000000
@@ -3430,7 +3436,7 @@ object uAna: TuAna
               Size.PlatformDefault = False
             end
           end
-          object Layout10: TLayout
+          object lo_urunBesAlt: TLayout
             Align = Top
             Position.Y = 169.000000000000000000
             Size.Width = 144.000000000000000000
@@ -4139,7 +4145,7 @@ object uAna: TuAna
               TabOrder = 3
             end
           end
-          object Layout17: TLayout
+          object lo_urunBesOrta: TLayout
             Align = Top
             Position.Y = 121.000000000000000000
             Size.Width = 144.000000000000000000
@@ -4147,9 +4153,8 @@ object uAna: TuAna
             Size.PlatformDefault = False
             TabOrder = 2
             object Label11: TLabel
-              Align = Top
+              Align = Center
               Margins.Top = 5.000000000000000000
-              Position.Y = 5.000000000000000000
               Size.Width = 144.000000000000000000
               Size.Height = 23.000000000000000000
               Size.PlatformDefault = False
@@ -4179,20 +4184,20 @@ object uAna: TuAna
             Opacity = 0.600000023841857900
             ShadowColor = claBlack
           end
-          object Layout11: TLayout
+          object lo_urunAltiUst: TLayout
             Align = Top
             Size.Width = 144.000000000000000000
             Size.Height = 121.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
-            object lo_urunAltiUst: TGlyph
+            object gly: TGlyph
               Align = Client
               Size.Width = 144.000000000000000000
               Size.Height = 121.000000000000000000
               Size.PlatformDefault = False
             end
           end
-          object Layout12: TLayout
+          object lo_urunAltiAlt: TLayout
             Align = Top
             Position.Y = 169.000000000000000000
             Size.Width = 144.000000000000000000
@@ -4901,7 +4906,7 @@ object uAna: TuAna
               TabOrder = 3
             end
           end
-          object Layout18: TLayout
+          object lo_urunAltiOrta: TLayout
             Align = Top
             Position.Y = 121.000000000000000000
             Size.Width = 144.000000000000000000
@@ -4909,9 +4914,8 @@ object uAna: TuAna
             Size.PlatformDefault = False
             TabOrder = 2
             object Label12: TLabel
-              Align = Top
+              Align = Center
               Margins.Top = 5.000000000000000000
-              Position.Y = 5.000000000000000000
               Size.Width = 144.000000000000000000
               Size.Height = 23.000000000000000000
               Size.PlatformDefault = False
@@ -4973,7 +4977,7 @@ object uAna: TuAna
           FileName = 'C:\Users\ahmet\Downloads\icons8-market-64.png'
         end>
       IsSelected = False
-      Size.Width = 95.000000000000000000
+      Size.Width = 96.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'tabitemcustom'
@@ -5030,7 +5034,7 @@ object uAna: TuAna
           FileName = 'C:\Users\ahmet\Downloads\icons8-categories-64.png'
         end>
       IsSelected = False
-      Size.Width = 95.000000000000000000
+      Size.Width = 96.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'tabitemcustom'
@@ -5102,7 +5106,7 @@ object uAna: TuAna
           FileName = 'C:\Users\ahmet\Downloads\icons8-account-96.png'
         end>
       IsSelected = False
-      Size.Width = 97.000000000000000000
+      Size.Width = 96.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'tabitemcustom'
