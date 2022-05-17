@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.TabControl,
   FMX.StdCtrls, FMX.Gestures, FMX.Controls.Presentation, FMX.Objects,
-  FMX.MultiView, FMX.ImgList, FMX.Layouts, FMX.Effects;
+  FMX.MultiView, FMX.ImgList, FMX.Layouts, FMX.Effects, Data.DB, MemDS,
+  DBAccess, MSAccess;
 
 type
   TuAna = class(TForm)
@@ -27,7 +28,7 @@ type
     lo_urunBirUst: TLayout;
     Glyph1: TGlyph;
     lo_urunBirOrta: TLayout;
-    Label1: TLabel;
+    lbl_urunBirAdi: TLabel;
     btn_urunBirDetail: TButton;
     btn_urunBirSepet: TButton;
     urunIki: TRectangle;
@@ -49,54 +50,88 @@ type
     ShadowEffect6: TShadowEffect;
     lo_urunAltiUst: TLayout;
     gly: TGlyph;
+    img_urunBirDetail: TImage;
+    img_urunBirSepet: TImage;
+    lo_urunBirAlt: TLayout;
+    lbl_urunBirFiyat: TLabel;
+    lo_urunIkiAlt: TLayout;
+    btn_urunIkiDetail: TButton;
+    img_urunIkiDetail: TImage;
+    btn_urunIkiSepet: TButton;
+    img_urunIkiSepet: TImage;
+    lbl_urunIkiFiyat: TLabel;
+    lo_urunIkiOrta: TLayout;
+    lbl_urunIkiAdi: TLabel;
+    lo_urunUcAlt: TLayout;
+    btn_urunUcDetail: TButton;
+    img_urunUcDetail: TImage;
+    btn_urunUcSepet: TButton;
+    img_urunUcSepet: TImage;
+    lbl_urunUcFiyat: TLabel;
+    lo_urunUcOrta: TLayout;
+    lbl_urunUcAdi: TLabel;
+    lo_urunDortAlt: TLayout;
+    btn_urunDortDetail: TButton;
+    img_urunDortDetail: TImage;
+    btn_urunDortSepet: TButton;
+    img_urunDortSepet: TImage;
+    lbl_urunDortFiyat: TLabel;
+    lo_urunDortOrta: TLayout;
+    lbl_urunDortAdi: TLabel;
+    lo_urunBesAlt: TLayout;
+    btn_urunBesDetail: TButton;
+    img_urunBesDetail: TImage;
+    btn_urunBesSepet: TButton;
+    img_urunBesSepet: TImage;
+    lbl_urunBesFiyat: TLabel;
+    lo_urunBesOrta: TLayout;
+    lbl_urunBesAdi: TLabel;
+    lo_urunAltiAlt: TLayout;
+    btn_urunAltiDetail: TButton;
+    img_urunAltiDetail: TImage;
+    btn_urunAltiSepet: TButton;
+    img_urunAltiSepet: TImage;
+    lbl_urunAltiFiyat: TLabel;
+    lo_urunAltiOrta: TLayout;
+    lbl_urunAltiAdi: TLabel;
+    Glyph2: TGlyph;
+    MSConnection1: TMSConnection;
+    MSQuery1: TMSQuery;
+    V: TVertScrollBox;
+    Rectangle1: TRectangle;
+    ShadowEffect7: TShadowEffect;
+    Rectangle2: TRectangle;
+    ShadowEffect8: TShadowEffect;
+    Rectangle3: TRectangle;
+    ShadowEffect9: TShadowEffect;
+    Rectangle4: TRectangle;
+    ShadowEffect10: TShadowEffect;
+    Rectangle5: TRectangle;
+    ShadowEffect11: TShadowEffect;
+    Rectangle6: TRectangle;
+    ShadowEffect12: TShadowEffect;
     Image1: TImage;
     Image2: TImage;
-    lo_urunBirAlt: TLayout;
-    Label7: TLabel;
-    lo_urunIkiAlt: TLayout;
-    Button3: TButton;
     Image3: TImage;
-    Button4: TButton;
     Image4: TImage;
-    Label2: TLabel;
-    lo_urunIkiOrta: TLayout;
-    Label8: TLabel;
-    lo_urunUcAlt: TLayout;
-    Button5: TButton;
     Image5: TImage;
-    Button6: TButton;
     Image6: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
     Label3: TLabel;
-    lo_urunUcOrta: TLayout;
-    Label9: TLabel;
-    lo_urunDortAlt: TLayout;
-    Button7: TButton;
-    Image7: TImage;
-    Button8: TButton;
-    Image8: TImage;
     Label4: TLabel;
-    lo_urunDortOrta: TLayout;
-    Label10: TLabel;
-    lo_urunBesAlt: TLayout;
-    Button9: TButton;
-    Image9: TImage;
-    Button10: TButton;
-    Image10: TImage;
     Label5: TLabel;
-    lo_urunBesOrta: TLayout;
-    Label11: TLabel;
-    lo_urunAltiAlt: TLayout;
-    Button1: TButton;
-    Image11: TImage;
-    Button2: TButton;
-    Image12: TImage;
     Label6: TLabel;
-    lo_urunAltiOrta: TLayout;
-    Label12: TLabel;
-    Glyph2: TGlyph;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
+    procedure img_SepetimClick(Sender: TObject);
+    procedure urunBirClick(Sender: TObject);
+    procedure urunIkiClick(Sender: TObject);
+    procedure urunUcClick(Sender: TObject);
+    procedure urunDortClick(Sender: TObject);
+    procedure urunBesClick(Sender: TObject);
+    procedure urunAltiClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -110,12 +145,53 @@ implementation
 
 {$R *.fmx}
 {$R *.LgXhdpiPh.fmx ANDROID}
-{$R *.LgXhdpiTb.fmx ANDROID}
 
 procedure TuAna.FormCreate(Sender: TObject);
 begin
   { This defines the default active tab at runtime }
   tabcontrol_Menu.ActiveTab := tabUrunler;
+
+   case MSQuery1.RecordCount of
+    1:
+        urunBir.Visible := True;
+    2:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+      end;
+    3:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+        urunUc.Visible := True;
+      end;
+    4:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+        urunUc.Visible := True;
+        urunDort.Visible := True;
+      end;
+    5:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+        urunUc.Visible := True;
+        urunDort.Visible := True;
+        urunBes.Visible := True;
+      end;
+    6:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+        urunUc.Visible := True;
+        urunDort.Visible := True;
+        urunBes.Visible := True;
+        urunAlti.Visible := True;
+      end;
+  end;
+
+  
 end;
 
 procedure TuAna.FormGesture(Sender: TObject;
@@ -138,6 +214,43 @@ begin
     end;
   end;
 {$ENDIF}
+end;
+
+procedure TuAna.img_SepetimClick(Sender: TObject);
+begin
+ tabcontrol_Menu.TabIndex := 1;
+end;
+
+procedure TuAna.urunAltiClick(Sender: TObject);
+begin
+     ShowMessage('URUN6');
+end;
+
+procedure TuAna.urunBesClick(Sender: TObject);
+begin
+     ShowMessage('URUN5');
+end;
+
+procedure TuAna.urunBirClick(Sender: TObject);
+begin
+    //ShowMessage('URUN1');
+    btn_urunBirDetail.Visible := True;
+    btn_urunBirSepet.Visible := True;
+end;
+
+procedure TuAna.urunDortClick(Sender: TObject);
+begin
+     ShowMessage('URUN4');
+end;
+
+procedure TuAna.urunIkiClick(Sender: TObject);
+begin
+     ShowMessage('URUN2');
+end;
+
+procedure TuAna.urunUcClick(Sender: TObject);
+begin
+     ShowMessage('URUN3');
 end;
 
 end.

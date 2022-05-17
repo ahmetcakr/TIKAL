@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- BEGIN_INCLUDE(manifest) -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.embarcadero.TabbedApplication"
+    package="com.embarcadero.tikal"
     android:versionCode="1"
     android:versionName="1.0.0"
     android:installLocation="preferExternal">
@@ -24,7 +24,7 @@
     <application
         android:persistent="False"
         android:restoreAnyVersion="False"
-        android:label="TabbedApplication"
+        android:label="tikal"
         android:debuggable="true"
         android:largeHeap="False"
         android:icon="@drawable/ic_launcher"
@@ -40,11 +40,11 @@
              This will take care of integrating with our NDK code. -->
         <activity
             android:name="com.embarcadero.firemonkey.FMXNativeActivity"
-            android:label="TabbedApplication"
+            android:label="tikal"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:launchMode="singleTask">
             <!-- Tell NativeActivity the name of our .so -->
-            <meta-data android:name="android.app.lib_name" android:value="TabbedApplication" />
+            <meta-data android:name="android.app.lib_name" android:value="tikal" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
