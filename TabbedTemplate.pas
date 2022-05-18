@@ -98,30 +98,30 @@ type
     MSConnection1: TMSConnection;
     MSQuery1: TMSQuery;
     V: TVertScrollBox;
-    Rectangle1: TRectangle;
+    kategoriBir: TRectangle;
     ShadowEffect7: TShadowEffect;
-    Rectangle2: TRectangle;
+    kategoriUc: TRectangle;
     ShadowEffect8: TShadowEffect;
-    Rectangle3: TRectangle;
+    kategoriBes: TRectangle;
     ShadowEffect9: TShadowEffect;
-    Rectangle4: TRectangle;
+    kategoriAlti: TRectangle;
     ShadowEffect10: TShadowEffect;
-    Rectangle5: TRectangle;
+    kategoriDort: TRectangle;
     ShadowEffect11: TShadowEffect;
-    Rectangle6: TRectangle;
+    kategoriIki: TRectangle;
     ShadowEffect12: TShadowEffect;
-    Image1: TImage;
-    Image2: TImage;
-    Image3: TImage;
-    Image4: TImage;
-    Image5: TImage;
-    Image6: TImage;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
+    img_kategoriIki: TImage;
+    img_kategoriDort: TImage;
+    img_kategoriAlti: TImage;
+    img_kategoriBes: TImage;
+    img_kategoriUc: TImage;
+    img_kategoriBir: TImage;
+    lbl_kategoriIki: TLabel;
+    lbl_kategoriDort: TLabel;
+    lbl_kategoriAlti: TLabel;
+    lbl_kategoriBes: TLabel;
+    lbl_kategoriUc: TLabel;
+    lbl_kategoriBir: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -132,6 +132,12 @@ type
     procedure urunDortClick(Sender: TObject);
     procedure urunBesClick(Sender: TObject);
     procedure urunAltiClick(Sender: TObject);
+    procedure kategoriBirClick(Sender: TObject);
+    procedure kategoriIkiClick(Sender: TObject);
+    procedure kategoriUcClick(Sender: TObject);
+    procedure kategoriDortClick(Sender: TObject);
+    procedure kategoriBesClick(Sender: TObject);
+    procedure kategoriAltiClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -140,6 +146,7 @@ type
 
 var
   uAna: TuAna;
+  kategoriAdi : String;
 
 implementation
 
@@ -148,8 +155,10 @@ implementation
 
 procedure TuAna.FormCreate(Sender: TObject);
 begin
-  { This defines the default active tab at runtime }
   tabcontrol_Menu.ActiveTab := tabUrunler;
+
+  // Querydeki kayýtlar kadar ürünü listelemek için;
+
 
    case MSQuery1.RecordCount of
     1:
@@ -191,7 +200,7 @@ begin
       end;
   end;
 
-  
+
 end;
 
 procedure TuAna.FormGesture(Sender: TObject;
@@ -218,8 +227,54 @@ end;
 
 procedure TuAna.img_SepetimClick(Sender: TObject);
 begin
+
+     // Sol üstteki sepet resmine týkladýðýnda sepet sayfasýna yönlenmesi için;
+
  tabcontrol_Menu.TabIndex := 1;
 end;
+
+
+
+    // KATEGORÝ CLÝCK EVENTLERÝ  ###
+
+procedure TuAna.kategoriAltiClick(Sender: TObject);
+begin
+     kategoriAdi := lbl_kategoriAlti.Text.ToLower;
+     ShowMessage(lbl_kategoriAlti.Text.ToLower);
+end;
+
+procedure TuAna.kategoriBesClick(Sender: TObject);
+begin
+     kategoriAdi := lbl_kategoriBes.Text.ToLower;
+     ShowMessage(lbl_kategoriBes.Text.ToLower);
+end;
+
+procedure TuAna.kategoriBirClick(Sender: TObject);
+begin
+     kategoriAdi := lbl_kategoriBir.Text.ToLower;
+     ShowMessage(lbl_kategoriBir.Text.ToLower);
+end;
+
+procedure TuAna.kategoriDortClick(Sender: TObject);
+begin
+     kategoriAdi := lbl_kategoriDort.Text.ToLower;
+     ShowMessage(lbl_kategoriDort.Text.ToLower);
+end;
+
+procedure TuAna.kategoriIkiClick(Sender: TObject);
+begin
+     kategoriAdi := lbl_kategoriIki.Text.ToLower;
+    ShowMessage(lbl_kategoriIki.Text.ToLower);
+end;
+
+procedure TuAna.kategoriUcClick(Sender: TObject);
+begin
+     kategoriAdi := lbl_kategoriUc.Text.ToLower;
+     ShowMessage(lbl_kategoriUc.Text.ToLower);
+end;
+
+
+ // URUN CLICK EVENTLERÝ  ###
 
 procedure TuAna.urunAltiClick(Sender: TObject);
 begin
