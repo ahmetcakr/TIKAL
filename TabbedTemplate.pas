@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.TabControl,
   FMX.StdCtrls, FMX.Gestures, FMX.Controls.Presentation, FMX.Objects,
   FMX.MultiView, FMX.ImgList, FMX.Layouts, FMX.Effects, Data.DB, MemDS,
-  DBAccess, MSAccess;
+  DBAccess, MSAccess, System.ImageList;
 
 type
   TuAna = class(TForm)
@@ -26,7 +26,7 @@ type
     urunBir: TRectangle;
     ShadowEffect1: TShadowEffect;
     lo_urunBirUst: TLayout;
-    Glyph1: TGlyph;
+    gly_urunBir: TGlyph;
     lo_urunBirOrta: TLayout;
     lbl_urunBirAdi: TLabel;
     btn_urunBirDetail: TButton;
@@ -37,19 +37,19 @@ type
     urunUc: TRectangle;
     ShadowEffect3: TShadowEffect;
     lo_urunUcUst: TLayout;
-    Glyph3: TGlyph;
+    gly_urunUc: TGlyph;
     urunDort: TRectangle;
     ShadowEffect4: TShadowEffect;
     lo_urunDortUst: TLayout;
-    Glyph4: TGlyph;
+    gly_urunDort: TGlyph;
     urunBes: TRectangle;
     ShadowEffect5: TShadowEffect;
     lo_urunBesUst: TLayout;
-    Glyph5: TGlyph;
+    gly_urunBes: TGlyph;
     urunAlti: TRectangle;
     ShadowEffect6: TShadowEffect;
     lo_urunAltiUst: TLayout;
-    gly: TGlyph;
+    gly_urunAlti: TGlyph;
     img_urunBirDetail: TImage;
     img_urunBirSepet: TImage;
     lo_urunBirAlt: TLayout;
@@ -94,7 +94,7 @@ type
     lbl_urunAltiFiyat: TLabel;
     lo_urunAltiOrta: TLayout;
     lbl_urunAltiAdi: TLabel;
-    Glyph2: TGlyph;
+    gly_urunIki: TGlyph;
     MSConnection1: TMSConnection;
     MSQuery1: TMSQuery;
     V: TVertScrollBox;
@@ -122,6 +122,21 @@ type
     lbl_kategoriBes: TLabel;
     lbl_kategoriUc: TLabel;
     lbl_kategoriBir: TLabel;
+    ImageList1: TImageList;
+    MSQuery1urunId: TIntegerField;
+    MSQuery1urunAdi: TStringField;
+    MSQuery1urunOzellik: TMemoField;
+    MSQuery1urunFiyat: TCurrencyField;
+    MSQuery1urunAdet: TIntegerField;
+    MSQuery1urunKategori: TStringField;
+    MSQuery2: TMSQuery;
+    MSQuery2urunId: TIntegerField;
+    MSQuery2urunAdi: TStringField;
+    MSQuery2urunFiyat: TCurrencyField;
+    MSQuery3: TMSQuery;
+    MSQuery3kategoriId: TIntegerField;
+    MSQuery3kategoriAdi: TStringField;
+    MSQuery3aktif: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -138,29 +153,397 @@ type
     procedure kategoriDortClick(Sender: TObject);
     procedure kategoriBesClick(Sender: TObject);
     procedure kategoriAltiClick(Sender: TObject);
+    procedure btn_urunBirSepetClick(Sender: TObject);
+    procedure btn_urunBirDetailClick(Sender: TObject);
+    procedure btn_urunIkiSepetClick(Sender: TObject);
+    procedure btn_urunIkiDetailClick(Sender: TObject);
+    procedure btn_urunUcSepetClick(Sender: TObject);
+    procedure btn_urunUcDetailClick(Sender: TObject);
+    procedure btn_urunDortSepetClick(Sender: TObject);
+    procedure btn_urunDortDetailClick(Sender: TObject);
+    procedure btn_urunBesSepetClick(Sender: TObject);
+    procedure btn_urunBesDetailClick(Sender: TObject);
+    procedure btn_urunAltiSepetClick(Sender: TObject);
+    procedure btn_urunAltiDetailClick(Sender: TObject);
+    procedure Scr_urunlerClick(Sender: TObject);
   private
     { Private declarations }
   public
+  kategoriAdi : String;
+  urunid : Integer;
     { Public declarations }
   end;
 
 var
   uAna: TuAna;
-  kategoriAdi : String;
+
+
 
 implementation
 
 {$R *.fmx}
 {$R *.LgXhdpiPh.fmx ANDROID}
 
+
+procedure TuAna.btn_urunBirDetailClick(Sender: TObject);
+begin
+   urunid := 0;
+end;
+
+procedure TuAna.btn_urunBirSepetClick(Sender: TObject);
+begin
+   urunid := 0;
+end;
+
+procedure TuAna.btn_urunIkiDetailClick(Sender: TObject);
+begin
+     urunid := 1;
+end;
+
+procedure TuAna.btn_urunIkiSepetClick(Sender: TObject);
+begin
+     urunid := 1;
+end;
+
+procedure TuAna.btn_urunUcDetailClick(Sender: TObject);
+begin
+     urunid := 2;
+end;
+
+procedure TuAna.btn_urunUcSepetClick(Sender: TObject);
+begin
+     urunid := 2;
+end;
+
+procedure TuAna.btn_urunDortDetailClick(Sender: TObject);
+begin
+     urunid := 3;
+end;
+
+procedure TuAna.btn_urunDortSepetClick(Sender: TObject);
+begin
+     urunid := 3;
+end;
+
+procedure TuAna.btn_urunBesDetailClick(Sender: TObject);
+begin
+     urunid := 4;
+end;
+
+procedure TuAna.btn_urunBesSepetClick(Sender: TObject);
+begin
+     urunid := 4;
+end;
+
+procedure TuAna.btn_urunAltiDetailClick(Sender: TObject);
+begin
+     urunid := 5;
+end;
+
+procedure TuAna.btn_urunAltiSepetClick(Sender: TObject);
+begin
+     urunid := 5;
+end;
+
+
+
+
+
+
 procedure TuAna.FormCreate(Sender: TObject);
+var
+  I: Integer;
 begin
   tabcontrol_Menu.ActiveTab := tabUrunler;
 
-  // Querydeki kayýtlar kadar ürünü listelemek için;
 
 
-   case MSQuery1.RecordCount of
+  // URUNLERDEKÝ BÝLGÝLERÝ DOLDURMAK ÝÇÝN SQLDEN VERÝ ÇEKMEK ###
+
+
+  // URUN1
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat FROM urunler WHERE urunId=:urunId');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 1;
+   MSQuery2.Open;
+   lbl_urunBirAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunBirFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   // URUN2
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat FROM urunler WHERE urunId=:urunId');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 2;
+   MSQuery2.Open;
+   lbl_urunIkiAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunIkiFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   //URUN3
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat FROM urunler WHERE urunId=:urunId');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 3;
+   MSQuery2.Open;
+   lbl_urunUcAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunUcFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   //URUN4
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat FROM urunler WHERE urunId=:urunId');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 4;
+   MSQuery2.Open;
+   lbl_urunDortAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunDortFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   //URUN5
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat FROM urunler WHERE urunId=:urunId');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 5;
+   MSQuery2.Open;
+   lbl_urunBesAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunBesFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   //URUN6
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat FROM urunler WHERE urunId=:urunId');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 6;
+   MSQuery2.Open;
+   lbl_urunAltiAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunAltiFiyat.Text := MSQuery2.Fields[2].AsString;
+
+end;
+
+procedure TuAna.FormGesture(Sender: TObject;
+  const EventInfo: TGestureEventInfo; var Handled: Boolean);
+begin
+{$IFDEF ANDROID}
+  case EventInfo.GestureID of
+    sgiLeft:
+    begin
+      if tabcontrol_Menu.ActiveTab <> tabcontrol_Menu.Tabs[tabcontrol_Menu.TabCount-1] then
+        tabcontrol_Menu.ActiveTab := tabcontrol_Menu.Tabs[tabcontrol_Menu.TabIndex+1];
+      Handled := True;
+    end;
+
+    sgiRight:
+    begin
+      if tabcontrol_Menu.ActiveTab <> tabcontrol_Menu.Tabs[0] then
+        tabcontrol_Menu.ActiveTab := tabcontrol_Menu.Tabs[tabcontrol_Menu.TabIndex-1];
+      Handled := True;
+    end;
+  end;
+{$ENDIF}
+end;
+
+procedure TuAna.img_SepetimClick(Sender: TObject);
+begin
+     // Sol üstteki sepet resmine týkladýðýnda sepet sayfasýna yönlenmesi için;
+
+ tabcontrol_Menu.TabIndex := 1;
+end;
+
+
+
+    // KATEGORÝ CLÝCK EVENTLERÝ  ###
+
+
+    // Elektronik kategorisi
+
+procedure TuAna.kategoriBirClick(Sender: TObject);
+begin
+     tabcontrol_Menu.TabIndex := 0;
+
+
+
+
+     MSQuery3.Close;
+     MSQuery3.SQL.Clear;
+     MSQuery3.SQL.BeginUpdate;
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=1 WHERE kategoriAdi =:kategoriAdi');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi2');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi3');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi4');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi5');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi6');
+     MSQuery3.SQL.EndUpdate;
+     MSQuery3.Params.ParamByName('kategoriAdi').Value := Trim('Elektronik');
+     MSQuery3.Params.ParamByName('kategoriAdi2').Value := Trim('Araba');
+     MSQuery3.Params.ParamByName('kategoriAdi3').Value := Trim('Ev');
+     MSQuery3.Params.ParamByName('kategoriAdi4').Value := Trim('Giyim');
+     MSQuery3.Params.ParamByName('kategoriAdi5').Value := Trim('Ayakkabi');
+     MSQuery3.Params.ParamByName('kategoriAdi6').Value := Trim('Yaz');
+     MSQuery3.Execute;
+
+
+                // Querydeki kayýtlar kadar ürünü listelemek için;
+
+  MSQuery3.Close;
+  MSQuery3.SQL.Clear;
+  MSQuery3.SQL.BeginUpdate;
+  MSQuery3.SQL.Add('SELECT * FROM kategoriler where aktif=:aktif');
+  MSQuery3.SQL.EndUpdate;
+  MSQuery3.Params.ParamByName('aktif').Value := 1;
+  MSQuery3.Open;
+  kategoriAdi := MSQuery3.Fields[1].AsString;
+
+  if kategoriAdi = 'Elektronik' then
+  begin
+
+  MSQuery1.Close;
+  MSQuery1.SQL.Clear;
+  MSQuery1.SQL.BeginUpdate;
+  MSQuery1.SQL.Add('select * from urunler where urunKategori =:urunKategori');
+  MSQuery1.SQL.EndUpdate;
+  MSQuery1.Params.ParamByName('urunKategori').Value := Trim('Elektronik');
+  MSQuery1.Open;
+
+  case MSQuery1.RecordCount of
+    1:
+    begin
+        urunBir.Visible := True;
+
+        urunIki.Visible := False;
+        urunUc.Visible := False;
+        urunDort.Visible := False;
+        urunBes.Visible := False;
+        urunAlti.Visible := False;
+    end;
+
+
+    2:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+
+        urunUc.Visible := False;
+        urunDort.Visible := False;
+        urunBes.Visible := False;
+        urunAlti.Visible := False;
+      end;
+    3:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+        urunUc.Visible := True;
+
+        urunDort.Visible := False;
+        urunBes.Visible := False;
+        urunAlti.Visible := False;
+      end;
+    4:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+        urunUc.Visible := True;
+        urunDort.Visible := True;
+
+         urunBes.Visible := False;
+        urunAlti.Visible := False;
+      end;
+    5:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+        urunUc.Visible := True;
+        urunDort.Visible := True;
+        urunBes.Visible := True;
+
+        urunAlti.Visible := False;
+      end;
+    6:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+        urunUc.Visible := True;
+        urunDort.Visible := True;
+        urunBes.Visible := True;
+        urunAlti.Visible := True;
+      end;
+
+  end;
+
+  end
+
+  else
+  begin
+       ShowMessage('hata');
+  end;
+
+
+
+end;
+
+
+
+    // araba kategorisi
+procedure TuAna.kategoriIkiClick(Sender: TObject);
+begin
+     tabcontrol_Menu.TabIndex := 0;
+
+     MSQuery3.Close;
+     MSQuery3.SQL.Clear;
+     MSQuery3.SQL.BeginUpdate;
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=1 WHERE kategoriAdi =:kategoriAdi');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi2');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi3');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi4');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi5');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi6');
+     MSQuery3.SQL.EndUpdate;
+     MSQuery3.Params.ParamByName('kategoriAdi').Value := Trim('Araba');
+     MSQuery3.Params.ParamByName('kategoriAdi2').Value := Trim('Elektronik');
+     MSQuery3.Params.ParamByName('kategoriAdi3').Value := Trim('Ev');
+     MSQuery3.Params.ParamByName('kategoriAdi4').Value := Trim('Giyim');
+     MSQuery3.Params.ParamByName('kategoriAdi5').Value := Trim('Ayakkabi');
+     MSQuery3.Params.ParamByName('kategoriAdi6').Value := Trim('Yaz');
+     MSQuery3.Execute;
+
+
+           // Querydeki kayýtlar kadar ürünü listelemek için;
+
+  MSQuery3.Close;
+  MSQuery3.SQL.Clear;
+  MSQuery3.SQL.BeginUpdate;
+  MSQuery3.SQL.Add('SELECT * FROM kategoriler where aktif=:aktif');
+  MSQuery3.SQL.EndUpdate;
+  MSQuery3.Params.ParamByName('aktif').Value := 1;
+  MSQuery3.Open;
+  kategoriAdi := MSQuery3.Fields[1].AsString;
+
+  if kategoriAdi = 'Araba' then
+  begin
+
+  MSQuery1.Close;
+  MSQuery1.SQL.Clear;
+  MSQuery1.SQL.BeginUpdate;
+  MSQuery1.SQL.Add('select * from urunler where urunKategori =:urunKategori');
+  MSQuery1.SQL.EndUpdate;
+  MSQuery1.Params.ParamByName('urunKategori').Value := Trim('Araba');
+  MSQuery1.Open;
+
+  case MSQuery1.RecordCount of
     1:
         urunBir.Visible := True;
     2:
@@ -198,114 +581,250 @@ begin
         urunBes.Visible := True;
         urunAlti.Visible := True;
       end;
+
+  end;        case MSQuery1.RecordCount of
+    1:
+    begin
+        urunBir.Visible := True;
+
+        urunIki.Visible := False;
+        urunUc.Visible := False;
+        urunDort.Visible := False;
+        urunBes.Visible := False;
+        urunAlti.Visible := False;
+    end;
+
+
+    2:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+
+        urunUc.Visible := False;
+        urunDort.Visible := False;
+        urunBes.Visible := False;
+        urunAlti.Visible := False;
+      end;
+    3:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+        urunUc.Visible := True;
+
+        urunDort.Visible := False;
+        urunBes.Visible := False;
+        urunAlti.Visible := False;
+      end;
+    4:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+        urunUc.Visible := True;
+        urunDort.Visible := True;
+
+         urunBes.Visible := False;
+        urunAlti.Visible := False;
+      end;
+    5:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+        urunUc.Visible := True;
+        urunDort.Visible := True;
+        urunBes.Visible := True;
+
+        urunAlti.Visible := False;
+      end;
+    6:
+      begin
+        urunBir.Visible := True;
+        urunIki.Visible := True;
+        urunUc.Visible := True;
+        urunDort.Visible := True;
+        urunBes.Visible := True;
+        urunAlti.Visible := True;
+      end;
+
+  end;
+
+  end
+
+  else
+  begin
+       ShowMessage('hata');
   end;
 
 
+
 end;
 
-procedure TuAna.FormGesture(Sender: TObject;
-  const EventInfo: TGestureEventInfo; var Handled: Boolean);
-begin
-{$IFDEF ANDROID}
-  case EventInfo.GestureID of
-    sgiLeft:
-    begin
-      if tabcontrol_Menu.ActiveTab <> tabcontrol_Menu.Tabs[tabcontrol_Menu.TabCount-1] then
-        tabcontrol_Menu.ActiveTab := tabcontrol_Menu.Tabs[tabcontrol_Menu.TabIndex+1];
-      Handled := True;
-    end;
-
-    sgiRight:
-    begin
-      if tabcontrol_Menu.ActiveTab <> tabcontrol_Menu.Tabs[0] then
-        tabcontrol_Menu.ActiveTab := tabcontrol_Menu.Tabs[tabcontrol_Menu.TabIndex-1];
-      Handled := True;
-    end;
-  end;
-{$ENDIF}
-end;
-
-procedure TuAna.img_SepetimClick(Sender: TObject);
-begin
-
-     // Sol üstteki sepet resmine týkladýðýnda sepet sayfasýna yönlenmesi için;
-
- tabcontrol_Menu.TabIndex := 1;
-end;
-
-
-
-    // KATEGORÝ CLÝCK EVENTLERÝ  ###
-
-procedure TuAna.kategoriAltiClick(Sender: TObject);
-begin
-     kategoriAdi := lbl_kategoriAlti.Text.ToLower;
-     ShowMessage(lbl_kategoriAlti.Text.ToLower);
-end;
-
-procedure TuAna.kategoriBesClick(Sender: TObject);
-begin
-     kategoriAdi := lbl_kategoriBes.Text.ToLower;
-     ShowMessage(lbl_kategoriBes.Text.ToLower);
-end;
-
-procedure TuAna.kategoriBirClick(Sender: TObject);
-begin
-     kategoriAdi := lbl_kategoriBir.Text.ToLower;
-     ShowMessage(lbl_kategoriBir.Text.ToLower);
-end;
-
-procedure TuAna.kategoriDortClick(Sender: TObject);
-begin
-     kategoriAdi := lbl_kategoriDort.Text.ToLower;
-     ShowMessage(lbl_kategoriDort.Text.ToLower);
-end;
-
-procedure TuAna.kategoriIkiClick(Sender: TObject);
-begin
-     kategoriAdi := lbl_kategoriIki.Text.ToLower;
-    ShowMessage(lbl_kategoriIki.Text.ToLower);
-end;
-
+    // yaz kategorisi
 procedure TuAna.kategoriUcClick(Sender: TObject);
 begin
-     kategoriAdi := lbl_kategoriUc.Text.ToLower;
-     ShowMessage(lbl_kategoriUc.Text.ToLower);
+     tabcontrol_Menu.TabIndex := 0;
+
+     MSQuery3.Close;
+     MSQuery3.SQL.Clear;
+     MSQuery3.SQL.BeginUpdate;
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=1 WHERE kategoriAdi =:kategoriAdi');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi2');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi3');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi4');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi5');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi6');
+     MSQuery3.SQL.EndUpdate;
+     MSQuery3.Params.ParamByName('kategoriAdi').Value := Trim('Yaz');
+     MSQuery3.Params.ParamByName('kategoriAdi2').Value := Trim('Araba');
+     MSQuery3.Params.ParamByName('kategoriAdi3').Value := Trim('Ev');
+     MSQuery3.Params.ParamByName('kategoriAdi4').Value := Trim('Giyim');
+     MSQuery3.Params.ParamByName('kategoriAdi5').Value := Trim('Ayakkabi');
+     MSQuery3.Params.ParamByName('kategoriAdi6').Value := Trim('Elektronik');
+     MSQuery3.Execute;
+
 end;
 
 
- // URUN CLICK EVENTLERÝ  ###
+// Ev kategorisi
+procedure TuAna.kategoriDortClick(Sender: TObject);
+begin
+     tabcontrol_Menu.TabIndex := 0;
+
+     MSQuery3.Close;
+     MSQuery3.SQL.Clear;
+     MSQuery3.SQL.BeginUpdate;
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=1 WHERE kategoriAdi =:kategoriAdi');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi2');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi3');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi4');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi5');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi6');
+     MSQuery3.SQL.EndUpdate;
+     MSQuery3.Params.ParamByName('kategoriAdi').Value := Trim('Ev');
+     MSQuery3.Params.ParamByName('kategoriAdi2').Value := Trim('Elektronik');
+     MSQuery3.Params.ParamByName('kategoriAdi3').Value := Trim('Yaz');
+     MSQuery3.Params.ParamByName('kategoriAdi4').Value := Trim('Giyim');
+     MSQuery3.Params.ParamByName('kategoriAdi5').Value := Trim('Ayakkabi');
+     MSQuery3.Params.ParamByName('kategoriAdi6').Value := Trim('Araba');
+     MSQuery3.Execute;
+
+
+end;
+
+    // Ayakkabi kategorisi
+procedure TuAna.kategoriBesClick(Sender: TObject);
+begin
+     tabcontrol_Menu.TabIndex := 0;
+
+     MSQuery3.Close;
+     MSQuery3.SQL.Clear;
+     MSQuery3.SQL.BeginUpdate;
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=1 WHERE kategoriAdi =:kategoriAdi');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi2');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi3');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi4');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi5');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi6');
+     MSQuery3.SQL.EndUpdate;
+     MSQuery3.Params.ParamByName('kategoriAdi').Value := Trim('Ayakkabi');
+     MSQuery3.Params.ParamByName('kategoriAdi2').Value := Trim('Elektronik');
+     MSQuery3.Params.ParamByName('kategoriAdi3').Value := Trim('Yaz');
+     MSQuery3.Params.ParamByName('kategoriAdi4').Value := Trim('Giyim');
+     MSQuery3.Params.ParamByName('kategoriAdi5').Value := Trim('Ev');
+     MSQuery3.Params.ParamByName('kategoriAdi6').Value := Trim('Araba');
+     MSQuery3.Execute;
+
+end;
+
+    // Giyim kategorisi
+procedure TuAna.kategoriAltiClick(Sender: TObject);
+begin
+     tabcontrol_Menu.TabIndex := 0;
+
+     MSQuery3.Close;
+     MSQuery3.SQL.Clear;
+     MSQuery3.SQL.BeginUpdate;
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=1 WHERE kategoriAdi =:kategoriAdi');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi2');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi3');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi4');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi5');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi6');
+     MSQuery3.SQL.EndUpdate;
+     MSQuery3.Params.ParamByName('kategoriAdi').Value := Trim('Giyim');
+     MSQuery3.Params.ParamByName('kategoriAdi2').Value := Trim('Araba');
+     MSQuery3.Params.ParamByName('kategoriAdi3').Value := Trim('Ev');
+     MSQuery3.Params.ParamByName('kategoriAdi4').Value := Trim('Elektronik');
+     MSQuery3.Params.ParamByName('kategoriAdi5').Value := Trim('Ayakkabi');
+     MSQuery3.Params.ParamByName('kategoriAdi6').Value := Trim('Yaz');
+     MSQuery3.Execute;
+
+end;
+
+
+
+
+ procedure TuAna.Scr_urunlerClick(Sender: TObject);
+begin
+
+//   URUN ÜZERÝNDEKÝ BUTONLARIN GÝZLENMESÝ ÝÇÝN;
+
+     btn_urunBirDetail.Visible := False;
+     btn_urunBirSepet.Visible := False;
+
+     btn_urunIkiDetail.Visible := False;
+     btn_urunIkiSepet.Visible := False;
+
+     btn_urunUcDetail.Visible := False;
+     btn_urunUcSepet.Visible := False;
+
+     btn_urunDortDetail.Visible := False;
+     btn_urunDortSepet.Visible := False;
+
+     btn_urunBesDetail.Visible := False;
+     btn_urunBesSepet.Visible := False;
+
+     btn_urunAltiDetail.Visible := False;
+     btn_urunAltiSepet.Visible := False;
+end;
+
+   // URUN CLICK EVENTLERÝ  ###
+
+// URUNLER ÜZERÝNDEKÝ BUTONLARI GÖRÜNÜR HALE GETÝRMEK ÝÇÝN
 
 procedure TuAna.urunAltiClick(Sender: TObject);
 begin
-     ShowMessage('URUN6');
+     btn_urunAltiDetail.Visible := True;
+    btn_urunAltiSepet.Visible := True;
 end;
 
 procedure TuAna.urunBesClick(Sender: TObject);
 begin
-     ShowMessage('URUN5');
+     btn_urunBesDetail.Visible := True;
+    btn_urunBesSepet.Visible := True;
 end;
 
 procedure TuAna.urunBirClick(Sender: TObject);
 begin
-    //ShowMessage('URUN1');
     btn_urunBirDetail.Visible := True;
     btn_urunBirSepet.Visible := True;
 end;
 
 procedure TuAna.urunDortClick(Sender: TObject);
 begin
-     ShowMessage('URUN4');
+     btn_urunDortDetail.Visible := True;
+    btn_urunDortSepet.Visible := True;
 end;
 
 procedure TuAna.urunIkiClick(Sender: TObject);
 begin
-     ShowMessage('URUN2');
+     btn_urunIkiDetail.Visible := True;
+    btn_urunIkiSepet.Visible := True;
 end;
 
 procedure TuAna.urunUcClick(Sender: TObject);
 begin
-     ShowMessage('URUN3');
+     btn_urunUcDetail.Visible := True;
+    btn_urunUcSepet.Visible := True;
 end;
 
 end.
