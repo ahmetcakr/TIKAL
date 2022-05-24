@@ -150,6 +150,8 @@ type
     Label3: TLabel;
     Button1: TButton;
     Button2: TButton;
+    Layout1: TLayout;
+    Layout2: TLayout;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);

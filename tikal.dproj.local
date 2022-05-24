@@ -4,6 +4,6 @@
 		<NoProfile Android64=""/>
 	</ActiveMobileDevice>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.608,C:\Users\ahmet\OneDrive\Masaüstü\Work\YalinWorks\TIKAL\tikal.dproj=C:\Users\ahmet\OneDrive\Masaüstü\Work\YalinWorks\TIKAL\TabbedApplication.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.608,C:\Users\ahmet\OneDrive\Masaüstü\Work\YalinWorks\TIKAL\TabbedApplication.dproj=C:\Users\ahmet\OneDrive\Masaüstü\Work\YalinWorks\TIKAL\tikal.dproj</Transaction>
   </Transactions>
 </BorlandProject>
