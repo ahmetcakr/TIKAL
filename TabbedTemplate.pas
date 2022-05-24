@@ -137,6 +137,8 @@ type
     MSQuery3kategoriId: TIntegerField;
     MSQuery3kategoriAdi: TStringField;
     MSQuery3aktif: TStringField;
+    ImageList2: TImageList;
+    MSQuery2urunKategori: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -255,84 +257,6 @@ var
   I: Integer;
 begin
   tabcontrol_Menu.ActiveTab := tabUrunler;
-
-
-
-  // URUNLERDEKÝ BÝLGÝLERÝ DOLDURMAK ÝÇÝN SQLDEN VERÝ ÇEKMEK ###
-
-
-  // URUN1
-
-   MSQuery2.Close;
-   MSQuery2.SQL.Clear;
-   MSQuery2.SQL.BeginUpdate;
-   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat FROM urunler WHERE urunId=:urunId');
-   MSQuery2.SQL.EndUpdate;
-   MSQuery2.Params.ParamByName('urunId').Value := 1;
-   MSQuery2.Open;
-   lbl_urunBirAdi.Text := MSQuery2.Fields[1].AsString;
-   lbl_urunBirFiyat.Text := MSQuery2.Fields[2].AsString;
-
-   // URUN2
-
-   MSQuery2.Close;
-   MSQuery2.SQL.Clear;
-   MSQuery2.SQL.BeginUpdate;
-   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat FROM urunler WHERE urunId=:urunId');
-   MSQuery2.SQL.EndUpdate;
-   MSQuery2.Params.ParamByName('urunId').Value := 2;
-   MSQuery2.Open;
-   lbl_urunIkiAdi.Text := MSQuery2.Fields[1].AsString;
-   lbl_urunIkiFiyat.Text := MSQuery2.Fields[2].AsString;
-
-   //URUN3
-
-   MSQuery2.Close;
-   MSQuery2.SQL.Clear;
-   MSQuery2.SQL.BeginUpdate;
-   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat FROM urunler WHERE urunId=:urunId');
-   MSQuery2.SQL.EndUpdate;
-   MSQuery2.Params.ParamByName('urunId').Value := 3;
-   MSQuery2.Open;
-   lbl_urunUcAdi.Text := MSQuery2.Fields[1].AsString;
-   lbl_urunUcFiyat.Text := MSQuery2.Fields[2].AsString;
-
-   //URUN4
-
-   MSQuery2.Close;
-   MSQuery2.SQL.Clear;
-   MSQuery2.SQL.BeginUpdate;
-   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat FROM urunler WHERE urunId=:urunId');
-   MSQuery2.SQL.EndUpdate;
-   MSQuery2.Params.ParamByName('urunId').Value := 4;
-   MSQuery2.Open;
-   lbl_urunDortAdi.Text := MSQuery2.Fields[1].AsString;
-   lbl_urunDortFiyat.Text := MSQuery2.Fields[2].AsString;
-
-   //URUN5
-
-   MSQuery2.Close;
-   MSQuery2.SQL.Clear;
-   MSQuery2.SQL.BeginUpdate;
-   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat FROM urunler WHERE urunId=:urunId');
-   MSQuery2.SQL.EndUpdate;
-   MSQuery2.Params.ParamByName('urunId').Value := 5;
-   MSQuery2.Open;
-   lbl_urunBesAdi.Text := MSQuery2.Fields[1].AsString;
-   lbl_urunBesFiyat.Text := MSQuery2.Fields[2].AsString;
-
-   //URUN6
-
-   MSQuery2.Close;
-   MSQuery2.SQL.Clear;
-   MSQuery2.SQL.BeginUpdate;
-   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat FROM urunler WHERE urunId=:urunId');
-   MSQuery2.SQL.EndUpdate;
-   MSQuery2.Params.ParamByName('urunId').Value := 6;
-   MSQuery2.Open;
-   lbl_urunAltiAdi.Text := MSQuery2.Fields[1].AsString;
-   lbl_urunAltiFiyat.Text := MSQuery2.Fields[2].AsString;
-
 end;
 
 procedure TuAna.FormGesture(Sender: TObject;
@@ -366,6 +290,8 @@ end;
 
 
 
+
+
     // KATEGORÝ CLÝCK EVENTLERÝ  ###
 
 
@@ -374,6 +300,112 @@ end;
 procedure TuAna.kategoriBirClick(Sender: TObject);
 begin
      tabcontrol_Menu.TabIndex := 0;
+
+     gly_urunBir.Images := ImageList2;
+     gly_urunBir.ImageIndex := 0;
+
+     gly_urunIki.Images := ImageList2;
+     gly_urunIki.ImageIndex := 1;
+
+     gly_urunUc.Images := ImageList2;
+     gly_urunUc.ImageIndex := 2;
+
+     gly_urunDort.Images := ImageList2;
+     gly_urunDort.ImageIndex := 3;
+
+     gly_urunBes.Images := ImageList2;
+     gly_urunBes.ImageIndex := 4;
+
+     gly_urunAlti.Images := ImageList2;
+     gly_urunAlti.ImageIndex := 5;
+
+
+
+
+
+// URUNLERDEKÝ BÝLGÝLERÝ DOLDURMAK ÝÇÝN SQLDEN VERÝ ÇEKMEK ###
+
+
+  // URUN1
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat,urunKategori FROM urunler WHERE urunId=:urunId AND urunKategori=:urunKategori');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 7;
+   MSQuery2.Params.ParamByName('urunKategori').Value := Trim('Elektronik');
+   MSQuery2.Open;
+   lbl_urunBirAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunBirFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   // URUN2
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat,urunKategori FROM urunler WHERE urunId=:urunId AND urunKategori=:urunKategori');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 8;
+   MSQuery2.Params.ParamByName('urunKategori').Value := Trim('Elektronik');
+   MSQuery2.Open;
+   lbl_urunIkiAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunIkiFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   //URUN3
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat,urunKategori FROM urunler WHERE urunId=:urunId AND urunKategori=:urunKategori');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 9;
+   MSQuery2.Params.ParamByName('urunKategori').Value := Trim('Elektronik');
+   MSQuery2.Open;
+   lbl_urunUcAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunUcFiyat.Text := MSQuery2.Fields[2].AsString;
+
+
+    //URUN4
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat,urunKategori FROM urunler WHERE urunId=:urunId AND urunKategori=:urunKategori');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 10;
+   MSQuery2.Params.ParamByName('urunKategori').Value := Trim('Elektronik');
+   MSQuery2.Open;
+   lbl_urunDortAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunDortFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   //URUN5
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat,urunKategori FROM urunler WHERE urunId=:urunId AND urunKategori=:urunKategori');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 11;
+   MSQuery2.Params.ParamByName('urunKategori').Value := Trim('Elektronik');
+   MSQuery2.Open;
+   lbl_urunBesAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunBesFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   //URUN6
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat,urunKategori FROM urunler WHERE urunId=:urunId AND urunKategori=:urunKategori');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 12;
+   MSQuery2.Params.ParamByName('urunKategori').Value := Trim('Elektronik');
+   MSQuery2.Open;
+   lbl_urunAltiAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunAltiFiyat.Text := MSQuery2.Fields[2].AsString;
+
+
 
 
 
@@ -497,10 +529,131 @@ end;
 
 
 
+
+
+
+
+
     // araba kategorisi
 procedure TuAna.kategoriIkiClick(Sender: TObject);
 begin
      tabcontrol_Menu.TabIndex := 0;
+
+     gly_urunBir.Images := ImageList1;
+     gly_urunBir.ImageIndex := 0;
+
+     gly_urunIki.Images := ImageList1;
+     gly_urunIki.ImageIndex := 1;
+
+     gly_urunUc.Images := ImageList1;
+     gly_urunUc.ImageIndex := 2;
+
+     gly_urunDort.Images := ImageList1;
+     gly_urunDort.ImageIndex := 3;
+
+     gly_urunBes.Images := ImageList1;
+     gly_urunBes.ImageIndex := 4;
+
+     gly_urunAlti.Images := ImageList1;
+     gly_urunAlti.ImageIndex := 5;
+
+
+
+
+  // URUNLERDEKÝ BÝLGÝLERÝ DOLDURMAK ÝÇÝN SQLDEN VERÝ ÇEKMEK ###
+
+
+  // URUN1
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat,urunKategori FROM urunler WHERE urunId=:urunId AND urunKategori=:urunKategori');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 1;
+   MSQuery2.Params.ParamByName('urunKategori').Value := Trim('araba');
+   MSQuery2.Open;
+   lbl_urunBirAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunBirFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   // URUN2
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat,urunKategori FROM urunler WHERE urunId=:urunId AND urunKategori=:urunKategori');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 2;
+   MSQuery2.Params.ParamByName('urunKategori').Value := Trim('araba');
+   MSQuery2.Open;
+   lbl_urunIkiAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunIkiFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   //URUN3
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat,urunKategori FROM urunler WHERE urunId=:urunId AND urunKategori=:urunKategori');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 3;
+   MSQuery2.Params.ParamByName('urunKategori').Value := Trim('araba');
+   MSQuery2.Open;
+   lbl_urunUcAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunUcFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   //URUN4
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat,urunKategori FROM urunler WHERE urunId=:urunId AND urunKategori=:urunKategori');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 4;
+   MSQuery2.Params.ParamByName('urunKategori').Value := Trim('araba');
+   MSQuery2.Open;
+   lbl_urunDortAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunDortFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   //URUN5
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat,urunKategori FROM urunler WHERE urunId=:urunId AND urunKategori=:urunKategori');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 5;
+   MSQuery2.Params.ParamByName('urunKategori').Value := Trim('araba');
+   MSQuery2.Open;
+   lbl_urunBesAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunBesFiyat.Text := MSQuery2.Fields[2].AsString;
+
+   //URUN6
+
+   MSQuery2.Close;
+   MSQuery2.SQL.Clear;
+   MSQuery2.SQL.BeginUpdate;
+   MSQuery2.SQL.Add('SELECT urunId,urunAdi,urunFiyat,urunKategori FROM urunler WHERE urunId=:urunId AND urunKategori=:urunKategori');
+   MSQuery2.SQL.EndUpdate;
+   MSQuery2.Params.ParamByName('urunId').Value := 6;
+   MSQuery2.Params.ParamByName('urunKategori').Value := Trim('araba');
+   MSQuery2.Open;
+   lbl_urunAltiAdi.Text := MSQuery2.Fields[1].AsString;
+   lbl_urunAltiFiyat.Text := MSQuery2.Fields[2].AsString;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
      MSQuery3.Close;
      MSQuery3.SQL.Clear;
@@ -544,45 +697,6 @@ begin
   MSQuery1.Open;
 
   case MSQuery1.RecordCount of
-    1:
-        urunBir.Visible := True;
-    2:
-      begin
-        urunBir.Visible := True;
-        urunIki.Visible := True;
-      end;
-    3:
-      begin
-        urunBir.Visible := True;
-        urunIki.Visible := True;
-        urunUc.Visible := True;
-      end;
-    4:
-      begin
-        urunBir.Visible := True;
-        urunIki.Visible := True;
-        urunUc.Visible := True;
-        urunDort.Visible := True;
-      end;
-    5:
-      begin
-        urunBir.Visible := True;
-        urunIki.Visible := True;
-        urunUc.Visible := True;
-        urunDort.Visible := True;
-        urunBes.Visible := True;
-      end;
-    6:
-      begin
-        urunBir.Visible := True;
-        urunIki.Visible := True;
-        urunUc.Visible := True;
-        urunDort.Visible := True;
-        urunBes.Visible := True;
-        urunAlti.Visible := True;
-      end;
-
-  end;        case MSQuery1.RecordCount of
     1:
     begin
         urunBir.Visible := True;
@@ -653,6 +767,7 @@ begin
   begin
        ShowMessage('hata');
   end;
+
 
 
 
