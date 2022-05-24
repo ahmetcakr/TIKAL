@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.TabControl,
   FMX.StdCtrls, FMX.Gestures, FMX.Controls.Presentation, FMX.Objects,
   FMX.MultiView, FMX.ImgList, FMX.Layouts, FMX.Effects, Data.DB, MemDS,
-  DBAccess, MSAccess, System.ImageList;
+  DBAccess, MSAccess, System.ImageList, FMX.Edit;
 
 type
   TuAna = class(TForm)
@@ -139,6 +139,17 @@ type
     MSQuery3aktif: TStringField;
     ImageList2: TImageList;
     MSQuery2urunKategori: TStringField;
+    lo_hesapUst: TLayout;
+    lo_hesapOrta: TLayout;
+    lo_hesapAlt: TLayout;
+    Image1: TImage;
+    Label1: TLabel;
+    Edit1: TEdit;
+    Label2: TLabel;
+    Edit2: TEdit;
+    Label3: TLabel;
+    Button1: TButton;
+    Button2: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);

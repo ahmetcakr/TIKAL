@@ -8,7 +8,7 @@ object uAna: TuAna
   FormFactor.Height = 900
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
-  DesignerMasterStyle = 3
+  DesignerMasterStyle = 0
   object toolbar_baslik: TToolBar
     Anchors = []
     Size.Width = 460.000000000000000000
@@ -282,7 +282,7 @@ object uAna: TuAna
     Size.Height = 532.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 0
+    TabIndex = 3
     TabOrder = 1
     TabPosition = Bottom
     Sizes = (
@@ -344,8 +344,8 @@ object uAna: TuAna
         end>
       TextSettings.Font.Family = 'Consolas'
       StyledSettings = [Size, Style, FontColor]
-      IsSelected = True
-      Size.Width = 115.000000000000000000
+      IsSelected = False
+      Size.Width = 114.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'tabitemcustom'
@@ -5030,7 +5030,7 @@ object uAna: TuAna
       TextSettings.Font.Family = 'Consolas'
       StyledSettings = [Size, Style, FontColor]
       IsSelected = False
-      Size.Width = 115.000000000000000000
+      Size.Width = 114.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'tabitemcustom'
@@ -5089,7 +5089,7 @@ object uAna: TuAna
       TextSettings.Font.Family = 'Consolas'
       StyledSettings = [Size, Style, FontColor]
       IsSelected = False
-      Size.Width = 115.000000000000000000
+      Size.Width = 114.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'tabitemcustom'
@@ -5103,7 +5103,7 @@ object uAna: TuAna
         Size.Height = 483.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        Viewport.Width = 455.000000000000000000
+        Viewport.Width = 444.000000000000000000
         Viewport.Height = 483.000000000000000000
         object kategoriBir: TRectangle
           Align = Top
@@ -5113,7 +5113,7 @@ object uAna: TuAna
           Margins.Bottom = 25.000000000000000000
           Position.X = 25.000000000000000000
           Position.Y = 25.000000000000000000
-          Size.Width = 405.000000000000000000
+          Size.Width = 394.000000000000000000
           Size.Height = 80.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
@@ -5880,7 +5880,7 @@ object uAna: TuAna
                 FileName = 'C:\Users\ahmet\Downloads\ok.png'
               end>
             Align = Right
-            Position.X = 355.000000000000000000
+            Position.X = 344.000000000000000000
             Size.Width = 50.000000000000000000
             Size.Height = 80.000000000000000000
             Size.PlatformDefault = False
@@ -5890,7 +5890,7 @@ object uAna: TuAna
             Align = Client
             StyledSettings = [Size, Style, FontColor]
             Margins.Left = 25.000000000000000000
-            Size.Width = 330.000000000000000000
+            Size.Width = 319.000000000000000000
             Size.Height = 80.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Consolas'
@@ -5907,7 +5907,7 @@ object uAna: TuAna
           Margins.Bottom = 25.000000000000000000
           Position.X = 25.000000000000000000
           Position.Y = 285.000000000000000000
-          Size.Width = 405.000000000000000000
+          Size.Width = 394.000000000000000000
           Size.Height = 80.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
@@ -6674,7 +6674,7 @@ object uAna: TuAna
                 FileName = 'C:\Users\ahmet\Downloads\ok.png'
               end>
             Align = Right
-            Position.X = 355.000000000000000000
+            Position.X = 344.000000000000000000
             Size.Width = 50.000000000000000000
             Size.Height = 80.000000000000000000
             Size.PlatformDefault = False
@@ -6683,7 +6683,7 @@ object uAna: TuAna
             Align = Client
             StyledSettings = [Size, Style, FontColor]
             Margins.Left = 25.000000000000000000
-            Size.Width = 330.000000000000000000
+            Size.Width = 319.000000000000000000
             Size.Height = 80.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Consolas'
@@ -6699,7 +6699,7 @@ object uAna: TuAna
           Margins.Bottom = 25.000000000000000000
           Position.X = 25.000000000000000000
           Position.Y = 545.000000000000000000
-          Size.Width = 405.000000000000000000
+          Size.Width = 394.000000000000000000
           Size.Height = 80.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
@@ -7466,7 +7466,7 @@ object uAna: TuAna
                 FileName = 'C:\Users\ahmet\Downloads\ok.png'
               end>
             Align = Right
-            Position.X = 355.000000000000000000
+            Position.X = 344.000000000000000000
             Size.Width = 50.000000000000000000
             Size.Height = 80.000000000000000000
             Size.PlatformDefault = False
@@ -7475,7 +7475,7 @@ object uAna: TuAna
             Align = Client
             StyledSettings = [Size, Style, FontColor]
             Margins.Left = 25.000000000000000000
-            Size.Width = 330.000000000000000000
+            Size.Width = 319.000000000000000000
             Size.Height = 80.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Consolas'
@@ -7491,7 +7491,7 @@ object uAna: TuAna
           Margins.Bottom = 25.000000000000000000
           Position.X = 25.000000000000000000
           Position.Y = 675.000000000000000000
-          Size.Width = 405.000000000000000000
+          Size.Width = 394.000000000000000000
           Size.Height = 80.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
@@ -8258,7 +8258,7 @@ object uAna: TuAna
                 FileName = 'C:\Users\ahmet\Downloads\ok.png'
               end>
             Align = Right
-            Position.X = 355.000000000000000000
+            Position.X = 344.000000000000000000
             Size.Width = 50.000000000000000000
             Size.Height = 80.000000000000000000
             Size.PlatformDefault = False
@@ -8267,7 +8267,7 @@ object uAna: TuAna
             Align = Client
             StyledSettings = [Size, Style, FontColor]
             Margins.Left = 25.000000000000000000
-            Size.Width = 330.000000000000000000
+            Size.Width = 319.000000000000000000
             Size.Height = 80.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Consolas'
@@ -8283,7 +8283,7 @@ object uAna: TuAna
           Margins.Bottom = 25.000000000000000000
           Position.X = 25.000000000000000000
           Position.Y = 415.000000000000000000
-          Size.Width = 405.000000000000000000
+          Size.Width = 394.000000000000000000
           Size.Height = 80.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
@@ -9050,7 +9050,7 @@ object uAna: TuAna
                 FileName = 'C:\Users\ahmet\Downloads\ok.png'
               end>
             Align = Right
-            Position.X = 355.000000000000000000
+            Position.X = 344.000000000000000000
             Size.Width = 50.000000000000000000
             Size.Height = 80.000000000000000000
             Size.PlatformDefault = False
@@ -9059,7 +9059,7 @@ object uAna: TuAna
             Align = Client
             StyledSettings = [Size, Style, FontColor]
             Margins.Left = 25.000000000000000000
-            Size.Width = 330.000000000000000000
+            Size.Width = 319.000000000000000000
             Size.Height = 80.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Consolas'
@@ -9075,7 +9075,7 @@ object uAna: TuAna
           Margins.Bottom = 25.000000000000000000
           Position.X = 25.000000000000000000
           Position.Y = 155.000000000000000000
-          Size.Width = 405.000000000000000000
+          Size.Width = 394.000000000000000000
           Size.Height = 80.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
@@ -9840,7 +9840,7 @@ object uAna: TuAna
                 FileName = 'C:\Users\ahmet\Downloads\ok.png'
               end>
             Align = Right
-            Position.X = 355.000000000000000000
+            Position.X = 344.000000000000000000
             Size.Width = 50.000000000000000000
             Size.Height = 80.000000000000000000
             Size.PlatformDefault = False
@@ -9849,7 +9849,7 @@ object uAna: TuAna
             Align = Client
             StyledSettings = [Size, Style, FontColor]
             Margins.Left = 25.000000000000000000
-            Size.Width = 330.000000000000000000
+            Size.Width = 319.000000000000000000
             Size.Height = 80.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Consolas'
@@ -9923,8 +9923,8 @@ object uAna: TuAna
         end>
       TextSettings.Font.Family = 'Consolas'
       StyledSettings = [Size, Style, FontColor]
-      IsSelected = False
-      Size.Width = 115.000000000000000000
+      IsSelected = True
+      Size.Width = 116.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'tabitemcustom'
@@ -9932,6 +9932,248 @@ object uAna: TuAna
       Text = 'Hesab'#305'm'
       ExplicitSize.cx = 50.000000000000000000
       ExplicitSize.cy = 49.000000000000000000
+      object lo_hesapUst: TLayout
+        Align = Top
+        Size.Width = 460.000000000000000000
+        Size.Height = 161.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object Image1: TImage
+          MultiResBitmap.Height = 200
+          MultiResBitmap.Width = 200
+          MultiResBitmap = <
+            item
+              Width = 200
+              Height = 200
+              PNG = {
+                89504E470D0A1A0A0000000D49484452000000C8000000C80806000000AD58AE
+                9E000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                0C2A49444154785EEDDD6DAC1C551DC7F1B35BA97D00212D164208A2B49A9654
+                9B264230C5174809D04A5A23A40816880689A20281F8C08BA6242004048DA8C5
+                C4481AA4443434C8536CD3F0A2492D0984D888114AB5150954ADA8F401B47B3D
+                BFD939EDDEB973CECCD99DDD7BEFCEF7936CEEEEDEFF9D9D99FBFFEDCCEECE9E
+                3100000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000F5D1DAF9E29CF46A6D
+                35D29FB5D37A7EDB7CF3F0BDBF3287F6CF36B3E7BC6A56DFB0A23977D1DEF4D7
+                63B4B66E3AC73CF6939F26F5A77EE885C6377FB0BCD1681C4E7F3D466BDD6DDF
+                373B7EBB2AB9316FE1A6E60D775D995CF718557FF6F9EB9AAB6F5A935CF73852
+                3F6DE63FCCA756DCDEBCF88A9FA7BF1A63646464CAC89D5F7DC2BCB66B7152BF
+                F2DA2F34972CDD96FE7A8C51CB5AA27E98D5322049036CB86FA35DF823CF9023
+                C6EC3597DFB822AF115AEBEF5D6BB66FBE6E54FDB4997F68DCF38B857921697D
+                E7FAA7D58CAE3E99B60D55F35BF75F941464C4D47736FBA87A4FA892FA9B2FDB
+                D138B47F7E7A57785923D7CDB0B3EBA15EF21AC0C96B84BC70387921C936BBE3
+                6BFA98FABC667792FA4C480AEBB3CB1AB96EEAC0AE8BFA083580D3D908A17038
+                9D21F135BB936DFA98FA50B33B497D1A92D2F56E59CBAE9B6557DC14DA9D1B36
+                767DD4439906709246B0AF1BCC2B3B9696AAB72131279EB43BD4EC8E6BFAE446
+                4CFDDFDFFC40A8D99D23F3FE173BEDB2F53654454F048EAB2F7A8D342CEC3A19
+                7E31E140B13A85A499FE1C5A84A37AC9BAB45B9CD693EB57A7770DADA10F88DE
+                AEF486E3C499C65CB5B8FDB38CF9EF3766D5478D99FA9EF48E02E79E6ECCF973
+                D31B25A8B66CBDE641F3A2792AE3B8F71AB3F2CCF2CB5AB06E9275FAD42377A7
+                3787D6500724F9A04BEFE5E79935C5980BECA5F16AFBA76E87CC9D6ACCD9EF1A
+                336DB731174EB30D6A5B2464C90C63CEF8A731A7FEAD7DBD886A545BA65E8FAD
+                79D0BC689E346F215AB64FDB801CFF5AB9658D5837C3FE61E2D06F4172B71EFA
+                875F689F195D93270D676FFB1A410DB8647A7AC3CAFE7D961A7CEE31E90D4BD7
+                434D1F539F37AF9A375F48629735A2DEFE66E8775B877F172BCF69B6015D0338
+                BE4658609F793BC3E1641BC9C936BBE39ABEB35ED78BEA3B1D6BFF5DBEE6CE0B
+                896F1EDDB29E9CD955D47AF1D5EB7735945913C3459BFFC67DDF7E33BD79D422
+                BB7BB2C8367E9E77478CD9F9DFF6CF936D83659B284B752FD9DD1C39CDD6E635
+                6FA7B75BEDE9274D67EBD5F421AE5E75AACF366FD61E5BBBCFFE8DEA1614EC7A
+                89A6ADC7D0F4F382EABCF88EBD1C4A6F1C3572E31D27850ED199ECEAB9050971
+                8DA50015854354AF5A5D8AC2216A44D5EA318AC221AE5ECD5B140ED133BD9B7E
+                199AAE9B3EC62020400001010208081040408000020204101020808000010404
+                0820204000010102080810404080000202041010208080000104A46AFB0E1BF3
+                C6FFDA97F1A62F424D84F998C4084815F4ADBC2D078C79F05FC63CFEB631CFEC
+                6F5FDC6D7DE350DF3C1C143D96E6E797FF69CFC7C3FF26285D2220BDD0D6424D
+                B8D536A3BEEA9A4735CF1D6CD7B9AFE6F693C2A15074CE8F0B0CA211906E69AB
+                A1AD837663CA50932A285BEDA55F5C3814CA2CFD8EAD483402D20D85435B8D6E
+                ECB45B917E8424140EA7CC77E6310A0189A52D86B604BD504814B2AA94098746
+                722933E803462120B134FC8D1AD247CFD21A0DA5E8D95A43E884A65356997068
+                BC2C8D5C8268042446324695E785B686E7D1A06B971C7BF4E7678FF30F1DA469
+                EDE9F13541D970E40D7C875208480C5F436BD7256FA442171ADFD6C4F7CE5719
+                84632008480C5F336A78D2D02070BEDD9B507387108E812120317C6FE96A88D2
+                10DFB8B665DF22EE4438068A80546150EF0E118E81232055D060D121BE862E33
+                36AF4338C6050189E17B47EAA577D22B1E7A6B384FD90FEE08C7B821203174FA
+                813C6A5CDFA7E33AFECAF76E5599736E108E71454062E819DFB75BA4CF477440
+                A2B616FA945C3F75AC96EF5377BD6EF105CE211CE38E80C40A35A3DE95D227E4
+                3A4E4B3F438D5D74E807E1981008482CBD0E5163F642BB56A113DC108E098380
+                74438DD96D48B49B166A6CC231A110906EA941B59B14439FB8EB182DDFAE15E1
+                987008482F7408890E4854D3865E4F68974AC1382B1028C2312111905EE95D2D
+                35EDE7DED73E30F1BC19ED2D8B4EE1ACDB571FDFBE2FF49907E198B0084895F4
+                02DE9D6556678DF57DB0D889704C6804643C118E098F808C17C231291090F140
+                38260D0232688463522120834438261D023228558543D3D111C21A2951438A6A
+                785337C4A98E28EE7520088C424006A1AA70E808611D31AC23847508BDA6EB68
+                DA3AA2788B7D1CD5F43220048E2020FD564538340D6D21CA8EA5A5A38AB58579
+                CED6A32704A49FAA0A47D1347CF44DC77E8E055C0304A45FAA0887684BD04D38
+                9CAA8739AD1902D20F5585A3CC8978748C57D1A82A7ACD5266D70C631090AA55
+                150E09BD86D001913A10524709EB40C9D030A79A27B6225D212055AA321C7AA1
+                ED9BCE59F6EFB3A335BA614E7D0341F8C614461001A94A95E190373CD3D15622
+                F4755DDFF443F3052F025285AAC321DE614E0B0EA1D7EB11DF774F38C3543402
+                D2AB7E8423A4CC688C452FDA511A01E9C5A0C3216576957C5B1F82138D8074AB
+                DFE1080D50A7C7F6D16E942F20A1AFFD221701E9C620B61CBE5117F5D8FAF030
+                2F249A1FDFE99ECB7CFD17631090588308876877C8F796ADB6126E9853F761A2
+                3E33D1F15ABEAD8BE609D108482C1DDBD4EF703845A32FEAE045855597D008F3
+                DA5DD3201288464062A82943879157190E493EF3F09CBE2D46683C2E04119018
+                BEDD17A93A1C8E9ABB9717D71A9FCBB7AB86420424867655F25EECF62B1C8E8E
+                B7EAE63584C2C1AE554F08482C8D92A866759F58EBB8A87E86C3D163E8B1CB7C
+                50A82D4632242AE1E8150189A560A8597504AD9ED9432FA4ABE61A5F8FABA379
+                B5357317FD4E61D5EFCB060985588B9391B65C3A9A5747EFBA8B42A1B0128C4A
+                B136810002020410102080800001040408202040000101020808104040800002
+                020410102080800001040408202040000101020808104040F268581F9D49D637
+                426196C6A5D2F93762EA75090D02E1689A9A174DBF6CBD6A35FD3254E7C6D7C2
+                1804244BE35E6900369D95C90DCEE6A38675E3526D3DD0FEBBD0896A143CD5B8
+                BFD1F5D0185B9A963BABADA6AFBF29AAD7345DAD2EA150B91A37BE16E7331CA3
+                9E01C96B3235921A247BA219354F5EE3B870743EF326D3B0CD9917123DA6EA3B
+                1F5BCFF6D9FB1C4D43D3EA94370DC7D5770642F3A6FABC906899B25B0D2DBB6F
+                596B7A5AE9A10F88FDD7EE4DAF1EA57F766723B866F79D8529DB38AE3EAF5125
+                1B12D7D8798D9A37ADBC7038B1F5798FAD65A96059ED6FC6AEDB2133D40169CE
+                5DE4FF07BA460834C028B1F52E24790D9AD539CD50B33BB1F59DF3100A8713B1
+                ACC1753C0486FE8411AD47D77DCD3CFBF8AD7641E7A4778DA6617C42CD9BD5CF
+                FA89342F12A8B7F7EE3597DFB8A2B964E9B6F4AEA164D7C0F06BADBF67ADD9BE
+                E53ABBB0F9214194BA84436AF122BDB9FAE635E6ECF3D625FFD8B262C7978AA9
+                D733B32E65F5735E24A2BE4EE190DA9C7268ED63BF7976CD97AF39C5BCBEE70C
+                DB9A33D3BBC7481AE0E367FEDA7C66E99DE6D5BF9E6EF61F9C5258BFFCDC1F9B
+                0B96FCA854FDD463769BCF2F5B633EF69167CCEF772D681C6E9D90FE6A8C64DA
+                7366FDD15CB3F21633FB845DE6E53D730BE725B67EE1BCCDE6AA4B6E356FED9F
+                66F6EE9B55587FD917AF6D7E72F9E6F4AEA167D747BD8476B79206B05B9A648B
+                936ADDFE95A7CDEB7F5A9C5B3F7DC6CB8DBB1F5DD068348EBC8A8DA91F191999
+                3272CBA52F350E1EF87052D0219997533EF842F3D61F5E94DE655A5B379D6336
+                DCB7D13BEFB1F5D9652D5A3735DA7238765DD44F5E23E4358C93D7F479E17062
+                EAF34292D7EC4E5ED37755EF5B56DFBAA96138C4AE877AEA6C8450C338AD07D6
+                DE6F7EB7FDD2E4C6AC397F6EDCF6B34FE485C3697DEF1B0F9957762C4D6ECC5B
+                B8A9F1F53BAFF2D52721B9E3FA2714AAE40E5BDFBCE1AE2B93EB395ACF6F9B6F
+                367C77A33978A0BD7B5634EF0AC9C6071E3C527FF1AA5B9ACB56AF4FAEE7683D
+                B97EB579EA91BB931BD367BC65567CE9EA3A86A3F65A3B5F9CA366D0CFF4AE42
+                31B5B1346D8525BD5928A65662E7BD9FCB0A0000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                00000000000000C68731FF07FD0939B79753F15D0000000049454E44AE426082}
+              FileName = 'C:\Users\ahmet\Downloads\icon.png'
+            end>
+          Align = Bottom
+          Position.Y = 32.000000000000000000
+          Size.Width = 460.000000000000000000
+          Size.Height = 129.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object Label3: TLabel
+          Align = Top
+          StyledSettings = [Style]
+          Size.Width = 460.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Consolas'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.FontColor = claOrangered
+          TextSettings.HorzAlign = Center
+          Text = 'GIRIS'
+          TabOrder = 1
+        end
+      end
+      object lo_hesapOrta: TLayout
+        Align = Top
+        Position.Y = 161.000000000000000000
+        Size.Width = 460.000000000000000000
+        Size.Height = 152.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object Label1: TLabel
+          Align = Top
+          Margins.Left = 150.000000000000000000
+          Margins.Top = 20.000000000000000000
+          Margins.Right = 150.000000000000000000
+          Position.X = 150.000000000000000000
+          Position.Y = 20.000000000000000000
+          Size.Width = 160.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Center
+          Text = 'Nickname'
+          TabOrder = 0
+        end
+        object Edit1: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 1
+          TextSettings.HorzAlign = Center
+          Position.X = 100.000000000000000000
+          Position.Y = 37.000000000000000000
+          Margins.Left = 100.000000000000000000
+          Margins.Right = 100.000000000000000000
+          Size.Width = 260.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Nickname'
+          Caret.Color = claTomato
+          Caret.Interval = 1
+          Caret.Width = 1
+        end
+        object Label2: TLabel
+          Align = Top
+          Margins.Left = 150.000000000000000000
+          Margins.Top = 15.000000000000000000
+          Margins.Right = 150.000000000000000000
+          Position.X = 150.000000000000000000
+          Position.Y = 84.000000000000000000
+          Size.Width = 160.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Center
+          Text = 'Password'
+          TabOrder = 2
+        end
+        object Edit2: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 3
+          Password = True
+          TextSettings.HorzAlign = Center
+          Position.X = 100.000000000000000000
+          Position.Y = 101.000000000000000000
+          Margins.Left = 100.000000000000000000
+          Margins.Right = 100.000000000000000000
+          Size.Width = 260.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = '*******'
+        end
+      end
+      object lo_hesapAlt: TLayout
+        Align = Top
+        Position.Y = 313.000000000000000000
+        Size.Width = 460.000000000000000000
+        Size.Height = 176.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object Button1: TButton
+          Align = Top
+          StyledSettings = [Family, Size, Style]
+          Margins.Left = 150.000000000000000000
+          Margins.Top = 30.000000000000000000
+          Margins.Right = 150.000000000000000000
+          Position.X = 150.000000000000000000
+          Position.Y = 30.000000000000000000
+          Size.Width = 160.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'GIRIS'
+          TextSettings.FontColorForState.Pressed = claDarkorange
+        end
+        object Button2: TButton
+          Align = Top
+          StyledSettings = [Family, Size, Style]
+          Margins.Left = 150.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 150.000000000000000000
+          Position.X = 150.000000000000000000
+          Position.Y = 84.000000000000000000
+          Size.Width = 160.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'KAYIT OL'
+          TextSettings.FontColorForState.Pressed = claDarkorange
+        end
+      end
     end
   end
   object sideMenu: TMultiView
