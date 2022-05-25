@@ -157,6 +157,10 @@ type
     MSQuery4sifre: TStringField;
     MSQuery4aktif: TStringField;
     btn_urunlerGiris: TButton;
+    Rectangle1: TRectangle;
+    ShadowEffect13: TShadowEffect;
+    Rectangle2: TRectangle;
+    ShadowEffect14: TShadowEffect;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -413,10 +417,7 @@ begin
 end;
 
 
-
-
-
-    // KATEGORÝ CLÝCK EVENTLERÝ  ###
+// KATEGORÝ CLÝCK EVENTLERÝ  ###
 
 
     // Elektronik kategorisi
