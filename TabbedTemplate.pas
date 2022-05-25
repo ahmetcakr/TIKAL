@@ -142,16 +142,21 @@ type
     lo_hesapUst: TLayout;
     lo_hesapOrta: TLayout;
     lo_hesapAlt: TLayout;
-    Image1: TImage;
-    Label1: TLabel;
-    Edit1: TEdit;
-    Label2: TLabel;
-    Edit2: TEdit;
-    Label3: TLabel;
-    Button1: TButton;
-    Button2: TButton;
-    Layout1: TLayout;
-    Layout2: TLayout;
+    img_hesapUstLogo: TImage;
+    lbl_hesapOrtaNickname: TLabel;
+    edit_hesapOrtaNickname: TEdit;
+    lbl_hesapOrtaPassword: TLabel;
+    edit_hesapOrtaPassword: TEdit;
+    lbl_hesapUstBaslik: TLabel;
+    btn_hesapAltGiris: TButton;
+    btn_hesapAltKayit: TButton;
+    lo_hesapOrtaUst: TLayout;
+    lo_hesapOrtaAlt: TLayout;
+    MSQuery4: TMSQuery;
+    MSQuery4kullaniciAdi: TStringField;
+    MSQuery4sifre: TStringField;
+    MSQuery4aktif: TStringField;
+    btn_urunlerGiris: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -181,6 +186,9 @@ type
     procedure btn_urunAltiSepetClick(Sender: TObject);
     procedure btn_urunAltiDetailClick(Sender: TObject);
     procedure Scr_urunlerClick(Sender: TObject);
+    procedure btn_hesapAltGirisClick(Sender: TObject);
+    procedure btn_hesapAltKayitClick(Sender: TObject);
+    procedure btn_urunlerGirisClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -199,6 +207,12 @@ implementation
 {$R *.fmx}
 {$R *.LgXhdpiPh.fmx ANDROID}
 
+
+
+procedure TuAna.btn_urunlerGirisClick(Sender: TObject);
+begin
+   tabcontrol_Menu.TabIndex := 3;
+end;
 
 procedure TuAna.btn_urunBirDetailClick(Sender: TObject);
 begin
@@ -219,6 +233,8 @@ procedure TuAna.btn_urunIkiSepetClick(Sender: TObject);
 begin
      urunid := 1;
 end;
+
+
 
 procedure TuAna.btn_urunUcDetailClick(Sender: TObject);
 begin
@@ -250,6 +266,8 @@ begin
      urunid := 4;
 end;
 
+
+
 procedure TuAna.btn_urunAltiDetailClick(Sender: TObject);
 begin
      urunid := 5;
@@ -259,6 +277,99 @@ procedure TuAna.btn_urunAltiSepetClick(Sender: TObject);
 begin
      urunid := 5;
 end;
+
+
+ // GÝRÝS VE KAYIT ÝÇÝN KULLANILACAK KODLAR ###
+
+
+procedure TuAna.btn_hesapAltGirisClick(Sender: TObject);
+begin
+ // Giris tusu
+
+
+      if (edit_hesapOrtaNickname.Text<>'') AND (edit_hesapOrtaPassword.Text<>'') then
+      begin
+       MSQuery4.Close;
+       MSQuery4.SQL.Clear;
+       MSQuery4.SQL.BeginUpdate;
+       MSQuery4.SQL.Add('SELECT TOP 1 * FROM kullanicilar WHERE kullaniciAdi=:kullaniciAdi AND sifre=:sifre');
+       MSQuery4.SQL.EndUpdate;
+       MSQuery4.Params.ParamByName('kullaniciAdi').Value := edit_hesapOrtaNickname.Text;
+       MSQuery4.Params.ParamByName('sifre').Value := edit_hesapOrtaPassword.Text;
+       MSQuery4.Open;
+    if (MSQuery4.Fields[0].AsString <> edit_hesapOrtaNickname.Text) AND (MSQuery4.Fields[1].AsString <> edit_hesapOrtaPassword.Text) then
+    begin
+      ShowMessage('KULLANICI ADI VEYA SIFRE YANLIS !');
+    end
+    else
+    begin
+         MSQuery4.Close;
+         MSQuery4.SQL.Clear;
+         MSQuery4.SQL.BeginUpdate;
+         MSQuery4.SQL.Add('UPDATE kullanicilar SET aktif=1 WHERE kullaniciAdi=:kullaniciAdi');
+         MSQuery4.SQL.Add('UPDATE kullanicilar SET aktif=0 WHERE kullaniciAdi !=:kullaniciAdi');
+         MSQuery4.SQL.EndUpdate;
+         MSQuery4.Params.ParamByName('kullaniciAdi').Value := edit_hesapOrtaNickname.Text;
+         MSQuery4.Execute;
+         ShowMessage('Giris yapildi. ' + 'Hoþgeldin ' + edit_hesapOrtaNickname.Text);
+         tabcontrol_Menu.TabIndex := 2;
+         btn_urunlerGiris.Visible := False;
+    end;
+    
+    
+  end
+  else
+  begin     
+    ShowMessage('Lütfen kullanýcý adý / sifre alanýný boþ býrakmayýnýz.');
+  end;
+    
+
+
+end;
+
+
+procedure TuAna.btn_hesapAltKayitClick(Sender: TObject);
+begin
+    // KAYIT TUSU
+
+     if (edit_hesapOrtaNickname.Text<>'') AND (edit_hesapOrtaPassword.Text<>'') then
+     begin
+       MSQuery4.Close;
+       MSQuery4.SQL.Clear;
+       MSQuery4.SQL.BeginUpdate;
+       MSQuery4.SQL.Add('SELECT TOP 1 * FROM kullanicilar WHERE kullaniciAdi=:kullaniciAdi AND sifre=:sifre');
+       MSQuery4.SQL.EndUpdate;
+       MSQuery4.Params.ParamByName('kullaniciAdi').Value := edit_hesapOrtaNickname.Text;
+       MSQuery4.Params.ParamByName('sifre').Value := edit_hesapOrtaPassword.Text;
+       MSQuery4.Open;
+       
+        if (MSQuery4.Fields[0].AsString <> edit_hesapOrtaNickname.Text) AND (MSQuery4.Fields[1].AsString <> edit_hesapOrtaPassword.Text) then
+    begin
+       MSQuery4.Close;
+         MSQuery4.SQL.Clear;
+         MSQuery4.SQL.BeginUpdate;
+         MSQuery4.SQL.Add('INSERT INTO kullanicilar (kullaniciAdi,sifre,aktif) VALUES (:kullaniciAdi,:sifre,:aktif)');
+         MSQuery4.SQL.EndUpdate;
+         MSQuery4.Params.ParamByName('kullaniciAdi').Value := edit_hesapOrtaNickname.Text;
+         MSQuery4.Params.ParamByName('sifre').Value := edit_hesapOrtaPassword.Text;
+         MSQuery4.Params.ParamByName('aktif').Value := 0;
+         MSQuery4.Execute;
+         ShowMessage('Kayýt Baþarýlý ' + edit_hesapOrtaNickname.Text + ' Lütfen Giris Yapýnýz');
+    end
+    else
+    begin
+    ShowMessage('KULLANICI ADI VEYA SIFRE HATALI !');
+         
+    end;
+     end
+     else
+     begin
+     
+     end;
+
+
+end;
+
 
 
 
@@ -312,6 +423,11 @@ end;
 
 procedure TuAna.kategoriBirClick(Sender: TObject);
 begin
+     if btn_urunlerGiris.Visible = False then
+     begin
+     
+     
+     
      tabcontrol_Menu.TabIndex := 0;
 
      gly_urunBir.Images := ImageList2;
@@ -332,7 +448,7 @@ begin
      gly_urunAlti.Images := ImageList2;
      gly_urunAlti.ImageIndex := 5;
 
-
+     
 
 
 
@@ -542,7 +658,7 @@ end;
 
 
 
-
+end;
 
 
 
@@ -550,6 +666,11 @@ end;
     // araba kategorisi
 procedure TuAna.kategoriIkiClick(Sender: TObject);
 begin
+     if btn_urunlerGiris.Visible = False then
+     begin
+     
+     
+     
      tabcontrol_Menu.TabIndex := 0;
 
      gly_urunBir.Images := ImageList1;
@@ -784,11 +905,16 @@ begin
 
 
 
+end; 
 end;
 
     // yaz kategorisi
 procedure TuAna.kategoriUcClick(Sender: TObject);
 begin
+     if btn_urunlerGiris.Visible = False then
+     begin
+     
+     
      tabcontrol_Menu.TabIndex := 0;
 
      MSQuery3.Close;
@@ -810,11 +936,16 @@ begin
      MSQuery3.Execute;
 
 end;
-
+end;
 
 // Ev kategorisi
 procedure TuAna.kategoriDortClick(Sender: TObject);
 begin
+
+     if btn_urunlerGiris.Visible = False then
+     begin
+     
+     
      tabcontrol_Menu.TabIndex := 0;
 
      MSQuery3.Close;
@@ -837,10 +968,16 @@ begin
 
 
 end;
-
+end;
+ 
     // Ayakkabi kategorisi
 procedure TuAna.kategoriBesClick(Sender: TObject);
 begin
+
+     if btn_urunlerGiris.Visible = False then
+     begin
+     
+     
      tabcontrol_Menu.TabIndex := 0;
 
      MSQuery3.Close;
@@ -862,11 +999,14 @@ begin
      MSQuery3.Execute;
 
 end;
-
+end;
     // Giyim kategorisi
 procedure TuAna.kategoriAltiClick(Sender: TObject);
 begin
-     tabcontrol_Menu.TabIndex := 0;
+
+     if btn_urunlerGiris.Visible = False then
+     begin
+        tabcontrol_Menu.TabIndex := 0;
 
      MSQuery3.Close;
      MSQuery3.SQL.Clear;
@@ -885,6 +1025,9 @@ begin
      MSQuery3.Params.ParamByName('kategoriAdi5').Value := Trim('Ayakkabi');
      MSQuery3.Params.ParamByName('kategoriAdi6').Value := Trim('Yaz');
      MSQuery3.Execute;
+     end;
+     
+     
 
 end;
 
