@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.TabControl,
   FMX.StdCtrls, FMX.Gestures, FMX.Controls.Presentation, FMX.Objects,
   FMX.MultiView, FMX.ImgList, FMX.Layouts, FMX.Effects, Data.DB, MemDS,
-  DBAccess, MSAccess, System.ImageList, FMX.Edit;
+  DBAccess, MSAccess, System.ImageList, FMX.Edit, FMX.EditBox, FMX.SpinBox;
 
 type
   TuAna = class(TForm)
@@ -157,10 +157,24 @@ type
     MSQuery4sifre: TStringField;
     MSQuery4aktif: TStringField;
     btn_urunlerGiris: TButton;
-    Rectangle1: TRectangle;
+    sepet_urunBir: TRectangle;
     ShadowEffect13: TShadowEffect;
-    Rectangle2: TRectangle;
+    sepet_urunIki: TRectangle;
     ShadowEffect14: TShadowEffect;
+    lo_sepetUrunBirResim: TLayout;
+    lo_sepetUrunIkiResim: TLayout;
+    sepet_AltPanel: TRectangle;
+    lbl_sepetToplam: TLabel;
+    lbl_sepetToplamFiyat: TLabel;
+    btn_sepetTamamla: TButton;
+    lbl_SepetUrunBirAdi: TLabel;
+    lbl_SepetUrunIkiAdi: TLabel;
+    txt_urunIkiDetail: TText;
+    spin_urunIki: TSpinBox;
+    txt_urunBirDetail: TText;
+    spin_urunBir: TSpinBox;
+    gly_sepetUrunBir: TGlyph;
+    gly_sepetUrunIki: TGlyph;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -226,6 +240,54 @@ end;
 procedure TuAna.btn_urunBirSepetClick(Sender: TObject);
 begin
    urunid := 0;
+
+   MSQuery3.Close;
+   MSQuery3.SQL.Clear;
+   MSQuery3.SQL.BeginUpdate;
+   MSQuery3.SQL.Add('SELECT TOP 1 * FROM kategoriler WHERE aktif=:aktif');
+   MSQuery3.SQL.EndUpdate;
+   MSQuery3.Params.ParamByName('aktif').Value := '1';
+   MSQuery3.Open;
+
+   if gly_sepetUrunBir.Images = nil then
+   begin
+
+        if MSQuery3.Fields[1].Text = 'Araba' then
+         begin
+          gly_sepetUrunBir.Images:= ImageList1;
+          gly_sepetUrunBir.ImageIndex := 0;
+          end
+
+        else if MSQuery3.Fields[1].Text = 'Elektronik' then
+        begin
+         gly_sepetUrunBir.Images:= ImageList2;
+         gly_sepetUrunBir.ImageIndex := 0;
+         end;
+
+   end
+   else if gly_sepetUrunBir <> nil then
+        begin
+        if MSQuery3.Fields[1].Text = 'Araba' then
+         begin
+          gly_sepetUrunIki.Images:= ImageList1;
+          gly_sepetUrunIki.ImageIndex := 0;
+          end
+
+        else if MSQuery3.Fields[1].Text = 'Elektronik' then
+        begin
+         gly_sepetUrunIki.Images:= ImageList2;
+         gly_sepetUrunIki.ImageIndex := 0;
+         end;
+        end;
+
+
+
+
+
+
+
+
+
 end;
 
 procedure TuAna.btn_urunIkiDetailClick(Sender: TObject);
