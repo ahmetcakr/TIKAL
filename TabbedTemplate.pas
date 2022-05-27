@@ -7,7 +7,8 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.TabControl,
   FMX.StdCtrls, FMX.Gestures, FMX.Controls.Presentation, FMX.Objects,
   FMX.MultiView, FMX.ImgList, FMX.Layouts, FMX.Effects, Data.DB, MemDS,
-  DBAccess, MSAccess, System.ImageList, FMX.Edit, FMX.EditBox, FMX.SpinBox;
+  DBAccess, MSAccess, System.ImageList, FMX.Edit, FMX.EditBox, FMX.SpinBox,
+  FMX.Memo.Types, FMX.ScrollBox, FMX.Memo;
 
 type
   TuAna = class(TForm)
@@ -123,22 +124,12 @@ type
     lbl_kategoriUc: TLabel;
     lbl_kategoriBir: TLabel;
     ImageList1: TImageList;
-    MSQuery1urunId: TIntegerField;
-    MSQuery1urunAdi: TStringField;
-    MSQuery1urunOzellik: TMemoField;
-    MSQuery1urunFiyat: TCurrencyField;
-    MSQuery1urunAdet: TIntegerField;
-    MSQuery1urunKategori: TStringField;
     MSQuery2: TMSQuery;
-    MSQuery2urunId: TIntegerField;
-    MSQuery2urunAdi: TStringField;
-    MSQuery2urunFiyat: TCurrencyField;
     MSQuery3: TMSQuery;
     MSQuery3kategoriId: TIntegerField;
     MSQuery3kategoriAdi: TStringField;
     MSQuery3aktif: TStringField;
     ImageList2: TImageList;
-    MSQuery2urunKategori: TStringField;
     lo_hesapUst: TLayout;
     lo_hesapOrta: TLayout;
     lo_hesapAlt: TLayout;
@@ -175,6 +166,16 @@ type
     spin_urunBir: TSpinBox;
     gly_sepetUrunBir: TGlyph;
     gly_sepetUrunIki: TGlyph;
+    MSQuery1urunId: TIntegerField;
+    MSQuery1urunAdi: TStringField;
+    MSQuery1urunOzellik: TStringField;
+    MSQuery1urunFiyat: TSmallintField;
+    MSQuery1urunAdet: TIntegerField;
+    MSQuery1urunKategori: TStringField;
+    MSQuery2urunId: TIntegerField;
+    MSQuery2urunAdi: TStringField;
+    MSQuery2urunFiyat: TSmallintField;
+    MSQuery2urunKategori: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -207,6 +208,8 @@ type
     procedure btn_hesapAltGirisClick(Sender: TObject);
     procedure btn_hesapAltKayitClick(Sender: TObject);
     procedure btn_urunlerGirisClick(Sender: TObject);
+    procedure spin_urunBirChange(Sender: TObject);
+    procedure spin_urunIkiChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -232,14 +235,10 @@ begin
    tabcontrol_Menu.TabIndex := 3;
 end;
 
-procedure TuAna.btn_urunBirDetailClick(Sender: TObject);
-begin
-   urunid := 0;
-end;
+
 
 procedure TuAna.btn_urunBirSepetClick(Sender: TObject);
 begin
-   urunid := 0;
 
    MSQuery3.Close;
    MSQuery3.SQL.Clear;
@@ -249,6 +248,17 @@ begin
    MSQuery3.Params.ParamByName('aktif').Value := '1';
    MSQuery3.Open;
 
+
+
+
+   if (gly_sepetUrunBir.Images <> nil) AND (gly_sepetUrunIki.Images <> nil) then
+   begin
+         ShowMessage('Sepete maksimum 2 ürün eklenebilir.');
+         Abort;
+
+   end;
+
+
    if gly_sepetUrunBir.Images = nil then
    begin
 
@@ -256,12 +266,20 @@ begin
          begin
           gly_sepetUrunBir.Images:= ImageList1;
           gly_sepetUrunBir.ImageIndex := 0;
+          lbl_SepetUrunBirAdi.Text := lbl_urunBirAdi.Text;
+            ShowMessage('Eklendi.');
+            spin_urunBir.Value := spin_urunBir.Value + 1 ;
+            txt_urunBirDetail.Text := MSQuery1.Fields[2].AsString ;
           end
 
         else if MSQuery3.Fields[1].Text = 'Elektronik' then
         begin
          gly_sepetUrunBir.Images:= ImageList2;
          gly_sepetUrunBir.ImageIndex := 0;
+         lbl_SepetUrunBirAdi.Text := lbl_urunBirAdi.Text;
+         ShowMessage('Eklendi.');
+         spin_urunBir.Value := spin_urunBir.Value + 1 ;
+         txt_urunBirDetail.Text := MSQuery1.Fields[2].AsString ;
          end;
 
    end
@@ -271,12 +289,20 @@ begin
          begin
           gly_sepetUrunIki.Images:= ImageList1;
           gly_sepetUrunIki.ImageIndex := 0;
+          lbl_SepetUrunIkiAdi.Text := lbl_urunBirAdi.Text;
+          ShowMessage('Eklendi.');
+            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            txt_urunIkiDetail.Text := MSQuery1.Fields[2].AsString ;
           end
 
         else if MSQuery3.Fields[1].Text = 'Elektronik' then
         begin
          gly_sepetUrunIki.Images:= ImageList2;
          gly_sepetUrunIki.ImageIndex := 0;
+         lbl_SepetUrunIkiAdi.Text := lbl_urunBirAdi.Text;
+         ShowMessage('Eklendi.');
+            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            txt_urunIkiDetail.Text := MSQuery1.Fields[2].AsString ;
          end;
         end;
 
@@ -285,9 +311,25 @@ begin
 
 
 
+   MSQuery1.Close;
+   MSQuery1.SQL.Clear;
+   MSQuery1.SQL.BeginUpdate;
+   MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
+   MSQuery1.SQL.EndUpdate;
+   MSQuery1.Params.ParamByName('urunAdi').Value := 'BMW';
+   MSQuery1.Open;
+
+
+   //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
 
 
 
+
+end;
+
+procedure TuAna.btn_urunBirDetailClick(Sender: TObject);
+begin
+   urunid := 0;
 end;
 
 procedure TuAna.btn_urunIkiDetailClick(Sender: TObject);
@@ -297,7 +339,110 @@ end;
 
 procedure TuAna.btn_urunIkiSepetClick(Sender: TObject);
 begin
-     urunid := 1;
+   MSQuery3.Close;
+   MSQuery3.SQL.Clear;
+   MSQuery3.SQL.BeginUpdate;
+   MSQuery3.SQL.Add('SELECT TOP 1 * FROM kategoriler WHERE aktif=:aktif');
+   MSQuery3.SQL.EndUpdate;
+   MSQuery3.Params.ParamByName('aktif').Value := '1';
+   MSQuery3.Open;
+
+
+
+
+   if (gly_sepetUrunBir.Images <> nil) AND (gly_sepetUrunIki.Images <> nil) then
+   begin
+         ShowMessage('Sepete maksimum 2 ürün eklenebilir.');
+         Abort;
+
+   end;
+
+
+   if gly_sepetUrunBir.Images = nil then
+   begin
+
+        if MSQuery3.Fields[1].Text = 'Araba' then
+         begin
+          gly_sepetUrunBir.Images:= ImageList1;
+          gly_sepetUrunBir.ImageIndex := 1;
+          lbl_SepetUrunBirAdi.Text := lbl_urunIkiAdi.Text;
+            ShowMessage('Eklendi.');
+            spin_urunBir.Value := spin_urunBir.Value + 1;
+
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+            MSQuery1.Open;
+
+
+            txt_urunBirDetail.Text := MSQuery1.Fields[2].AsString;
+          end
+
+        else if MSQuery3.Fields[1].Text = 'Elektronik' then
+        begin
+         gly_sepetUrunBir.Images:= ImageList2;
+         gly_sepetUrunBir.ImageIndex := 1;
+         lbl_SepetUrunBirAdi.Text := lbl_urunIkiAdi.Text;
+         ShowMessage('Eklendi.');
+         spin_urunBir.Value := spin_urunBir.Value + 1 ;
+
+         MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+            MSQuery1.Open;
+
+
+            txt_urunBirDetail.Text := MSQuery1.Fields[2].AsString;
+         end;
+
+   end
+   else if gly_sepetUrunBir <> nil then
+        begin
+        if MSQuery3.Fields[1].Text = 'Araba' then
+         begin
+          gly_sepetUrunIki.Images:= ImageList1;
+          gly_sepetUrunIki.ImageIndex := 1;
+          lbl_SepetUrunIkiAdi.Text := lbl_urunIkiAdi.Text;
+          ShowMessage('Eklendi.');
+            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            txt_urunIkiDetail.Text := MSQuery1.Fields[2].AsString;
+          end
+
+        else if MSQuery3.Fields[1].Text = 'Elektronik' then
+        begin
+         gly_sepetUrunIki.Images:= ImageList2;
+         gly_sepetUrunIki.ImageIndex := 1;
+         lbl_SepetUrunIkiAdi.Text := lbl_urunIkiAdi.Text;
+         ShowMessage('Eklendi.');
+            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            txt_urunIkiDetail.Text := MSQuery1.Fields[2].AsString;
+         end;
+        end;
+
+
+
+
+
+
+   MSQuery1.Close;
+   MSQuery1.SQL.Clear;
+   MSQuery1.SQL.BeginUpdate;
+   MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
+   MSQuery1.SQL.EndUpdate;
+   MSQuery1.Params.ParamByName('urunAdi').Value := 'BMW';
+   MSQuery1.Open;
+
+
+   //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
+
 end;
 
 
@@ -476,6 +621,8 @@ begin
      // Sol üstteki sepet resmine týkladýðýnda sepet sayfasýna yönlenmesi için;
 
  tabcontrol_Menu.TabIndex := 1;
+
+
 end;
 
 
@@ -1121,7 +1268,47 @@ begin
      btn_urunAltiSepet.Visible := False;
 end;
 
-   // URUN CLICK EVENTLERÝ  ###
+
+
+procedure TuAna.spin_urunBirChange(Sender: TObject);
+begin
+     if gly_sepetUrunBir.Images <> nil then
+     begin
+       //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
+     end;
+
+
+     if spin_urunBir.Value = 0 then
+     begin
+          ShowMessage('ürün siliniyor..');
+         gly_sepetUrunBir.Images := nil;
+         lbl_SepetUrunBirAdi.Text := '';
+         txt_urunBirDetail.Text := '';
+         sepet_urunBir.Visible := false;
+     end;
+
+end;
+
+procedure TuAna.spin_urunIkiChange(Sender: TObject);
+begin
+     if gly_sepetUrunIki.Images <> nil then
+     begin
+       //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunIki.Text.ToInteger);
+     end;
+
+
+     if spin_urunIki.Value = 0 then
+     begin
+          ShowMessage('ürün siliniyor..');
+         gly_sepetUrunIki.Images := nil;
+         lbl_SepetUrunIkiAdi.Text := '';
+     end;
+end;
+
+
+
+
+// URUN CLICK EVENTLERÝ  ###
 
 // URUNLER ÜZERÝNDEKÝ BUTONLARI GÖRÜNÜR HALE GETÝRMEK ÝÇÝN
 
