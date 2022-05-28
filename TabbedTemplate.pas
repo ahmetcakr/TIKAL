@@ -264,9 +264,13 @@ begin
    end;
 
 
+
+
+
    if gly_sepetUrunBir.Images = nil then
    begin
    // eðer sepetteki 1. ürün kýsmý boþ ise;
+   sepet_urunBir.Visible := true;
 
         if MSQuery3.Fields[1].Text = 'Araba' then
          begin
@@ -318,9 +322,10 @@ begin
          end;
 
    end
-   else if gly_sepetUrunBir <> nil then
+   else if gly_sepetUrunBir.Images <> nil then
         begin
              // Eðer sepetteki 1. ürün alaný boþ deðilse;
+             sepet_urunIki.Visible := true;
 
         if MSQuery3.Fields[1].Text = 'Araba' then
          begin
@@ -426,6 +431,7 @@ begin
    if gly_sepetUrunBir.Images = nil then
    begin
        // eðer sepetteki 1. ürün kýsmý boþ ise;
+       sepet_urunBir.Visible := true;
 
         if MSQuery3.Fields[1].Text = 'Araba' then
          begin
@@ -481,6 +487,7 @@ begin
    else if gly_sepetUrunBir <> nil then
         begin
         // Eðer sepetteki 1. ürün alaný boþ deðilse;
+        sepet_urunIki.Visible := true;
 
         if MSQuery3.Fields[1].Text = 'Araba' then
          begin
@@ -500,7 +507,7 @@ begin
             MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
             MSQuery1.SQL.EndUpdate;
             MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
-            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
             MSQuery1.Open;
 
             txt_urunIkiDetail.Text := MSQuery1.Fields[2].AsString;
@@ -584,6 +591,7 @@ begin
    if gly_sepetUrunBir.Images = nil then
    begin
    // eðer sepetteki 1. ürün kýsmý boþ ise;
+   sepet_urunBir.Visible := true;
 
         if MSQuery3.Fields[1].Text = 'Araba' then
          begin
@@ -628,7 +636,7 @@ begin
             MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
             MSQuery1.SQL.EndUpdate;
             MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
-            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
             MSQuery1.Open;
 
          txt_urunBirDetail.Text := MSQuery1.Fields[2].AsString ;
@@ -638,6 +646,7 @@ begin
    else if gly_sepetUrunBir <> nil then
         begin
              // Eðer sepetteki 1. ürün alaný boþ deðilse;
+             sepet_urunIki.Visible := true;
 
         if MSQuery3.Fields[1].Text = 'Araba' then
          begin
@@ -655,7 +664,7 @@ begin
             MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
             MSQuery1.SQL.EndUpdate;
             MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
-            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
             MSQuery1.Open;
 
 
@@ -713,7 +722,154 @@ end;
 
 procedure TuAna.btn_urunDortSepetClick(Sender: TObject);
 begin
-     urunid := 3;
+       // Aktif kýsmý 1 olan tabloyu çaðýrýr.
+
+   MSQuery3.Close;
+   MSQuery3.SQL.Clear;
+   MSQuery3.SQL.BeginUpdate;
+   MSQuery3.SQL.Add('SELECT TOP 1 * FROM kategoriler WHERE aktif=:aktif');
+   MSQuery3.SQL.EndUpdate;
+   MSQuery3.Params.ParamByName('aktif').Value := '1';
+   MSQuery3.Open;
+
+
+
+
+   if (gly_sepetUrunBir.Images <> nil) AND (gly_sepetUrunIki.Images <> nil) then
+   begin
+        // sepetteki iki ürün de dolu ise uyarý verir.
+
+         ShowMessage('Sepete maksimum 2 ürün eklenebilir.');
+         Abort;
+
+   end;
+
+
+   if gly_sepetUrunBir.Images = nil then
+   begin
+   // eðer sepetteki 1. ürün kýsmý boþ ise;
+   sepet_urunBir.Visible := true;
+
+        if MSQuery3.Fields[1].Text = 'Araba' then
+         begin
+
+           // Aktifliði 1 olan kategori Araba ise bu kodlarý çalýþtýr.
+
+          gly_sepetUrunBir.Images:= ImageList1;
+          gly_sepetUrunBir.ImageIndex := 3;
+          lbl_SepetUrunBirAdi.Text := lbl_urunDortAdi.Text;
+            ShowMessage('Eklendi.');
+            spin_urunBir.Value := spin_urunBir.Value + 1 ;
+
+            // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+            MSQuery1.Open;
+
+
+            txt_urunBirDetail.Text := MSQuery1.Fields[2].AsString;
+          end
+
+        else if MSQuery3.Fields[1].Text = 'Elektronik' then
+        begin
+
+        // Aktifliði 1 olan kategori Elektronik ise bu kodlarý 1.ürün alanýnda çalýþtýr.
+
+         gly_sepetUrunBir.Images:= ImageList2;
+         gly_sepetUrunBir.ImageIndex := 3;
+         lbl_SepetUrunBirAdi.Text := lbl_urunDortAdi.Text;
+         ShowMessage('Eklendi.');
+         spin_urunBir.Value := spin_urunBir.Value + 1 ;
+
+         // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+            MSQuery1.Open;
+
+         txt_urunBirDetail.Text := MSQuery1.Fields[2].AsString ;
+         end;
+
+   end
+   else if gly_sepetUrunBir <> nil then
+        begin
+             // Eðer sepetteki 1. ürün alaný boþ deðilse;
+             sepet_urunIki.Visible := true;
+
+        if MSQuery3.Fields[1].Text = 'Araba' then
+         begin
+          //// Aktifliði 1 olan kategori Araba ise bu kodlarý 2.ürün alanýnda çalýþtýr.
+          gly_sepetUrunIki.Images:= ImageList1;
+          gly_sepetUrunIki.ImageIndex := 3;
+          lbl_SepetUrunIkiAdi.Text := lbl_urunDortAdi.Text;
+          ShowMessage('Eklendi.');
+            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+
+            // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
+            MSQuery1.Open;
+
+
+            txt_urunIkiDetail.Text := MSQuery1.Fields[2].AsString ;
+          end
+
+        else if MSQuery3.Fields[1].Text = 'Elektronik' then
+        begin
+             //// Aktifliði 1 olan kategori Araba ise bu kodlarý 2.ürün alanýnda çalýþtýr.
+         gly_sepetUrunIki.Images:= ImageList2;
+         gly_sepetUrunIki.ImageIndex := 3;
+         lbl_SepetUrunIkiAdi.Text := lbl_urunDortAdi.Text;
+         ShowMessage('Eklendi.');
+            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+
+            // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
+            MSQuery1.Open;
+
+
+            txt_urunIkiDetail.Text := MSQuery1.Fields[2].AsString ;
+         end;
+        end;
+
+
+
+
+    (*
+
+   MSQuery1.Close;
+   MSQuery1.SQL.Clear;
+   MSQuery1.SQL.BeginUpdate;
+   MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
+   MSQuery1.SQL.EndUpdate;
+   MSQuery1.Params.ParamByName('urunAdi').Value := 'BMW';
+   MSQuery1.Open;     *)
+
+
+   //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
+
+
+
 end;
 
 procedure TuAna.btn_urunBesDetailClick(Sender: TObject);
@@ -723,7 +879,153 @@ end;
 
 procedure TuAna.btn_urunBesSepetClick(Sender: TObject);
 begin
-     urunid := 4;
+            // Aktif kýsmý 1 olan tabloyu çaðýrýr.
+
+   MSQuery3.Close;
+   MSQuery3.SQL.Clear;
+   MSQuery3.SQL.BeginUpdate;
+   MSQuery3.SQL.Add('SELECT TOP 1 * FROM kategoriler WHERE aktif=:aktif');
+   MSQuery3.SQL.EndUpdate;
+   MSQuery3.Params.ParamByName('aktif').Value := '1';
+   MSQuery3.Open;
+
+
+
+
+   if (gly_sepetUrunBir.Images <> nil) AND (gly_sepetUrunIki.Images <> nil) then
+   begin
+        // sepetteki iki ürün de dolu ise uyarý verir.
+
+         ShowMessage('Sepete maksimum 2 ürün eklenebilir.');
+         Abort;
+
+   end;
+
+
+   if gly_sepetUrunBir.Images = nil then
+   begin
+   // eðer sepetteki 1. ürün kýsmý boþ ise;
+   sepet_urunBir.Visible := true;
+
+        if MSQuery3.Fields[1].Text = 'Araba' then
+         begin
+
+           // Aktifliði 1 olan kategori Araba ise bu kodlarý çalýþtýr.
+
+          gly_sepetUrunBir.Images:= ImageList1;
+          gly_sepetUrunBir.ImageIndex := 4;
+          lbl_SepetUrunBirAdi.Text := lbl_urunBesAdi.Text;
+            ShowMessage('Eklendi.');
+            spin_urunBir.Value := spin_urunBir.Value + 1 ;
+
+            // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+            MSQuery1.Open;
+
+
+            txt_urunBirDetail.Text := MSQuery1.Fields[2].AsString;
+          end
+
+        else if MSQuery3.Fields[1].Text = 'Elektronik' then
+        begin
+
+        // Aktifliði 1 olan kategori Elektronik ise bu kodlarý 1.ürün alanýnda çalýþtýr.
+
+         gly_sepetUrunBir.Images:= ImageList2;
+         gly_sepetUrunBir.ImageIndex := 4;
+         lbl_SepetUrunBirAdi.Text := lbl_urunBesAdi.Text;
+         ShowMessage('Eklendi.');
+         spin_urunBir.Value := spin_urunBir.Value + 1 ;
+
+         // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+            MSQuery1.Open;
+
+         txt_urunBirDetail.Text := MSQuery1.Fields[2].AsString ;
+         end;
+
+   end
+   else if gly_sepetUrunBir <> nil then
+        begin
+             // Eðer sepetteki 1. ürün alaný boþ deðilse;
+             sepet_urunIki.Visible := true;
+
+        if MSQuery3.Fields[1].Text = 'Araba' then
+         begin
+          //// Aktifliði 1 olan kategori Araba ise bu kodlarý 2.ürün alanýnda çalýþtýr.
+          gly_sepetUrunIki.Images:= ImageList1;
+          gly_sepetUrunIki.ImageIndex := 4;
+          lbl_SepetUrunIkiAdi.Text := lbl_urunBesAdi.Text;
+          ShowMessage('Eklendi.');
+            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+
+            // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
+            MSQuery1.Open;
+
+
+            txt_urunIkiDetail.Text := MSQuery1.Fields[2].AsString ;
+          end
+
+        else if MSQuery3.Fields[1].Text = 'Elektronik' then
+        begin
+             //// Aktifliði 1 olan kategori Araba ise bu kodlarý 2.ürün alanýnda çalýþtýr.
+         gly_sepetUrunIki.Images:= ImageList2;
+         gly_sepetUrunIki.ImageIndex := 4;
+         lbl_SepetUrunIkiAdi.Text := lbl_urunBesAdi.Text;
+         ShowMessage('Eklendi.');
+            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+
+            // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
+            MSQuery1.Open;
+
+
+            txt_urunIkiDetail.Text := MSQuery1.Fields[2].AsString ;
+         end;
+        end;
+
+
+
+
+    (*
+
+   MSQuery1.Close;
+   MSQuery1.SQL.Clear;
+   MSQuery1.SQL.BeginUpdate;
+   MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
+   MSQuery1.SQL.EndUpdate;
+   MSQuery1.Params.ParamByName('urunAdi').Value := 'BMW';
+   MSQuery1.Open;     *)
+
+
+   //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
+
+
 end;
 
 
@@ -735,7 +1037,152 @@ end;
 
 procedure TuAna.btn_urunAltiSepetClick(Sender: TObject);
 begin
-     urunid := 5;
+                 // Aktif kýsmý 1 olan tabloyu çaðýrýr.
+
+   MSQuery3.Close;
+   MSQuery3.SQL.Clear;
+   MSQuery3.SQL.BeginUpdate;
+   MSQuery3.SQL.Add('SELECT TOP 1 * FROM kategoriler WHERE aktif=:aktif');
+   MSQuery3.SQL.EndUpdate;
+   MSQuery3.Params.ParamByName('aktif').Value := '1';
+   MSQuery3.Open;
+
+
+
+
+   if (gly_sepetUrunBir.Images <> nil) AND (gly_sepetUrunIki.Images <> nil) then
+   begin
+        // sepetteki iki ürün de dolu ise uyarý verir.
+
+         ShowMessage('Sepete maksimum 2 ürün eklenebilir.');
+         Abort;
+
+   end;
+
+
+   if gly_sepetUrunBir.Images = nil then
+   begin
+   // eðer sepetteki 1. ürün kýsmý boþ ise;
+   sepet_urunBir.Visible := true;
+
+        if MSQuery3.Fields[1].Text = 'Araba' then
+         begin
+
+           // Aktifliði 1 olan kategori Araba ise bu kodlarý çalýþtýr.
+
+          gly_sepetUrunBir.Images:= ImageList1;
+          gly_sepetUrunBir.ImageIndex := 5;
+          lbl_SepetUrunBirAdi.Text := lbl_urunAltiAdi.Text;
+            ShowMessage('Eklendi.');
+            spin_urunBir.Value := spin_urunBir.Value + 1 ;
+
+            // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+            MSQuery1.Open;
+
+
+            txt_urunBirDetail.Text := MSQuery1.Fields[2].AsString;
+          end
+
+        else if MSQuery3.Fields[1].Text = 'Elektronik' then
+        begin
+
+        // Aktifliði 1 olan kategori Elektronik ise bu kodlarý 1.ürün alanýnda çalýþtýr.
+
+         gly_sepetUrunBir.Images:= ImageList2;
+         gly_sepetUrunBir.ImageIndex := 5;
+         lbl_SepetUrunBirAdi.Text := lbl_urunAltiAdi.Text;
+         ShowMessage('Eklendi.');
+         spin_urunBir.Value := spin_urunBir.Value + 1 ;
+
+         // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+            MSQuery1.Open;
+
+         txt_urunBirDetail.Text := MSQuery1.Fields[2].AsString ;
+         end;
+
+   end
+   else if gly_sepetUrunBir <> nil then
+        begin
+             // Eðer sepetteki 1. ürün alaný boþ deðilse;
+             sepet_urunIki.Visible := true;
+
+        if MSQuery3.Fields[1].Text = 'Araba' then
+         begin
+          //// Aktifliði 1 olan kategori Araba ise bu kodlarý 2.ürün alanýnda çalýþtýr.
+          gly_sepetUrunIki.Images:= ImageList1;
+          gly_sepetUrunIki.ImageIndex := 5;
+          lbl_SepetUrunIkiAdi.Text := lbl_urunAltiAdi.Text;
+          ShowMessage('Eklendi.');
+            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+
+            // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
+            MSQuery1.Open;
+
+
+            txt_urunIkiDetail.Text := MSQuery1.Fields[2].AsString ;
+          end
+
+        else if MSQuery3.Fields[1].Text = 'Elektronik' then
+        begin
+             //// Aktifliði 1 olan kategori Araba ise bu kodlarý 2.ürün alanýnda çalýþtýr.
+         gly_sepetUrunIki.Images:= ImageList2;
+         gly_sepetUrunIki.ImageIndex := 5;
+         lbl_SepetUrunIkiAdi.Text := lbl_urunAltiAdi.Text;
+         ShowMessage('Eklendi.');
+            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+
+            // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunKategori=:urunKategori AND urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
+            MSQuery1.Open;
+
+
+            txt_urunIkiDetail.Text := MSQuery1.Fields[2].AsString ;
+         end;
+        end;
+
+
+
+
+    (*
+
+   MSQuery1.Close;
+   MSQuery1.SQL.Clear;
+   MSQuery1.SQL.BeginUpdate;
+   MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
+   MSQuery1.SQL.EndUpdate;
+   MSQuery1.Params.ParamByName('urunAdi').Value := 'BMW';
+   MSQuery1.Open;     *)
+
+
+   //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
+
 end;
 
 
@@ -1566,6 +2013,8 @@ begin
           ShowMessage('ürün siliniyor..');
          gly_sepetUrunIki.Images := nil;
          lbl_SepetUrunIkiAdi.Text := '';
+         txt_urunIkiDetail.Text := '';
+         sepet_urunIki.Visible := false;
      end;
 end;
 
