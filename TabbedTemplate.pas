@@ -166,16 +166,23 @@ type
     spin_urunBir: TSpinBox;
     gly_sepetUrunBir: TGlyph;
     gly_sepetUrunIki: TGlyph;
+    MSQuery2urunId: TIntegerField;
+    MSQuery2urunAdi: TStringField;
+    MSQuery2urunFiyat: TSmallintField;
+    MSQuery2urunKategori: TStringField;
     MSQuery1urunId: TIntegerField;
     MSQuery1urunAdi: TStringField;
     MSQuery1urunOzellik: TStringField;
     MSQuery1urunFiyat: TSmallintField;
     MSQuery1urunAdet: TIntegerField;
     MSQuery1urunKategori: TStringField;
-    MSQuery2urunId: TIntegerField;
-    MSQuery2urunAdi: TStringField;
-    MSQuery2urunFiyat: TSmallintField;
-    MSQuery2urunKategori: TStringField;
+    Layout1: TLayout;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
+    Button5: TButton;
+    Button6: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -210,16 +217,19 @@ type
     procedure btn_urunlerGirisClick(Sender: TObject);
     procedure spin_urunBirChange(Sender: TObject);
     procedure spin_urunIkiChange(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
   kategoriAdi : String;
   urunid : Integer;
+  toplamfiyat: Integer;
     { Public declarations }
   end;
 
 var
   uAna: TuAna;
+
 
 
 
@@ -240,6 +250,10 @@ end;
 
 procedure TuAna.btn_urunBirSepetClick(Sender: TObject);
 begin
+
+
+
+
 
    // Aktif kýsmý 1 olan tabloyu çaðýrýr.
 
@@ -271,6 +285,10 @@ begin
    begin
    // eðer sepetteki 1. ürün kýsmý boþ ise;
    sepet_urunBir.Visible := true;
+
+
+
+
 
         if MSQuery3.Fields[1].Text = 'Araba' then
          begin
@@ -374,21 +392,25 @@ begin
         end;
 
 
+         (*
+        if (lbl_SepetUrunBirAdi.Text) <> '' then
+        begin
+           MSQuery1.Close;
+           MSQuery1.SQL.Clear;
+           MSQuery1.SQL.BeginUpdate;
+           MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
+           MSQuery1.SQL.EndUpdate;
+           MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+           MSQuery1.Open;
 
+           toplamfiyat := MSQuery1.Fields[3].AsInteger;
+           ShowMessage(toplamfiyat.ToString);
+           lbl_sepetToplamFiyat.Text := toplamfiyat.ToString;
 
-    (*
+           //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
 
-   MSQuery1.Close;
-   MSQuery1.SQL.Clear;
-   MSQuery1.SQL.BeginUpdate;
-   MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
-   MSQuery1.SQL.EndUpdate;
-   MSQuery1.Params.ParamByName('urunAdi').Value := 'BMW';
-   MSQuery1.Open;     *)
-
-
-   //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
-
+        end;
+              *)
 
 
 
@@ -1294,6 +1316,30 @@ end;
 
 
 
+procedure TuAna.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+
+     // Uygulama kapanýrken aktif olan kategoriyi 0 yapma.
+
+     MSQuery3.Close;
+     MSQuery3.SQL.Clear;
+     MSQuery3.SQL.BeginUpdate;
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi2');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi3');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi4');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi5');
+     MSQuery3.SQL.Add('UPDATE kategoriler SET aktif=0 WHERE kategoriAdi =:kategoriAdi6');
+     MSQuery3.SQL.EndUpdate;
+     MSQuery3.Params.ParamByName('kategoriAdi').Value := Trim('Elektronik');
+     MSQuery3.Params.ParamByName('kategoriAdi2').Value := Trim('Araba');
+     MSQuery3.Params.ParamByName('kategoriAdi3').Value := Trim('Ev');
+     MSQuery3.Params.ParamByName('kategoriAdi4').Value := Trim('Giyim');
+     MSQuery3.Params.ParamByName('kategoriAdi5').Value := Trim('Ayakkabi');
+     MSQuery3.Params.ParamByName('kategoriAdi6').Value := Trim('Yaz');
+     MSQuery3.Execute;
+end;
+
 procedure TuAna.FormCreate(Sender: TObject);
 var
   I: Integer;
@@ -1983,7 +2029,16 @@ procedure TuAna.spin_urunBirChange(Sender: TObject);
 begin
      if gly_sepetUrunBir.Images <> nil then
      begin
-       //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+            MSQuery1.Open;
+
+            toplamfiyat :=MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger;
+            lbl_sepetToplamFiyat.Text := toplamfiyat.ToString;
      end;
 
 
@@ -2003,7 +2058,16 @@ procedure TuAna.spin_urunIkiChange(Sender: TObject);
 begin
      if gly_sepetUrunIki.Images <> nil then
      begin
-       //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunIki.Text.ToInteger);
+            MSQuery1.Close;
+            MSQuery1.SQL.Clear;
+            MSQuery1.SQL.BeginUpdate;
+            MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
+            MSQuery1.SQL.EndUpdate;
+            MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
+            MSQuery1.Open;
+
+            toplamfiyat :=MSQuery1.Fields[3].AsInteger * spin_urunIki.Text.ToInteger;
+            lbl_sepetToplamFiyat.Text := toplamfiyat.ToString;
      end;
 
 
