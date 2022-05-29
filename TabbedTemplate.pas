@@ -183,6 +183,16 @@ type
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
+    btn_hesapAltCikis: TButton;
+    MSQuery5: TMSQuery;
+    MSQuery5urunAdi: TStringField;
+    MSQuery5kullaniciAdi: TStringField;
+    MSQuery5adet: TIntegerField;
+    MSQuery5fiyat: TSmallintField;
+    MSQuery5imageList: TStringField;
+    MSQuery5imageIndex: TSmallintField;
+    lbl_SepetUrunBirFiyat: TLabel;
+    lbl_SepetUrunIkiFiyat: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -218,12 +228,15 @@ type
     procedure spin_urunBirChange(Sender: TObject);
     procedure spin_urunIkiChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn_hesapAltCikisClick(Sender: TObject);
+    procedure btn_sepetTamamlaClick(Sender: TObject);
   private
     { Private declarations }
   public
   kategoriAdi : String;
   urunid : Integer;
   toplamfiyat: Integer;
+  aktifKullanici : string;
     { Public declarations }
   end;
 
@@ -295,9 +308,11 @@ begin
 
            // Aktifliði 1 olan kategori Araba ise bu kodlarý çalýþtýr.
 
-          gly_sepetUrunBir.Images:= ImageList1;
+          //gly_sepetUrunBir.Images:= ImageList1;
+          gly_sepetUrunBir.Images := gly_urunBir.Images;
           gly_sepetUrunBir.ImageIndex := 0;
           lbl_SepetUrunBirAdi.Text := lbl_urunBirAdi.Text;
+          lbl_SepetUrunBirFiyat.Text := lbl_urunBirFiyat.Text;
             ShowMessage('Eklendi.');
             spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -322,6 +337,7 @@ begin
          gly_sepetUrunBir.Images:= ImageList2;
          gly_sepetUrunBir.ImageIndex := 0;
          lbl_SepetUrunBirAdi.Text := lbl_urunBirAdi.Text;
+         lbl_SepetUrunBirFiyat.Text := lbl_urunBirFiyat.Text;
          ShowMessage('Eklendi.');
          spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -351,6 +367,7 @@ begin
           gly_sepetUrunIki.Images:= ImageList1;
           gly_sepetUrunIki.ImageIndex := 0;
           lbl_SepetUrunIkiAdi.Text := lbl_urunBirAdi.Text;
+          lbl_SepetUrunIkiFiyat.Text := lbl_urunBirFiyat.Text;
           ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -374,6 +391,7 @@ begin
          gly_sepetUrunIki.Images:= ImageList2;
          gly_sepetUrunIki.ImageIndex := 0;
          lbl_SepetUrunIkiAdi.Text := lbl_urunBirAdi.Text;
+         lbl_SepetUrunIkiFiyat.Text := lbl_urunBirFiyat.Text;
          ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -1211,6 +1229,18 @@ end;
  // GÝRÝS VE KAYIT ÝÇÝN KULLANILACAK KODLAR ###
 
 
+procedure TuAna.btn_hesapAltCikisClick(Sender: TObject);
+begin
+         MSQuery4.Close;
+         MSQuery4.SQL.Clear;
+         MSQuery4.SQL.BeginUpdate;
+         MSQuery4.SQL.Add('UPDATE kullanicilar SET aktif=0');
+         MSQuery4.SQL.EndUpdate;
+         MSQuery4.Execute;
+
+         aktifKullanici := '';
+end;
+
 procedure TuAna.btn_hesapAltGirisClick(Sender: TObject);
 begin
  // Giris tusu
@@ -1316,6 +1346,48 @@ end;
 
 
 
+procedure TuAna.btn_sepetTamamlaClick(Sender: TObject);
+begin
+
+     // Sepette iki ürün varsa;
+     if (gly_sepetUrunBir.Images <> nil) AND (gly_sepetUrunIki.Images <> nil) then
+     begin
+        ShowMessage('ikisi de dolu');
+
+        MSQuery5.Close;
+        MSQuery5.SQL.Clear;
+        MSQuery5.SQL.BeginUpdate;
+        MSQuery5.SQL.Add('INSERT INTO sepet (urunAdi,kullaniciAdi,adet,imageList,imageIndex,fiyat) VALUES (:urunAdi,:kullaniciAdi,:adet,:imageList,:imageIndex,:fiyat)');
+        MSQuery5.SQL.EndUpdate;
+        MSQuery5.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+        MSQuery5.Params.ParamByName('kullaniciAdi').Value := aktifKullanici;
+        MSQuery5.Params.ParamByName('adet').Value := spin_urunBir.Value;
+        MSQuery5.Params.ParamByName('imageList').Value := gly_sepetUrunBir.Images.Name;
+        MSQuery5.Params.ParamByName('imageIndex').Value := gly_sepetUrunBir.ImageIndex;
+        MSQuery5.Params.ParamByName('fiyat').Value := lbl_SepetUrunBirFiyat.Text.ToInteger;
+        MSQuery5.Execute;
+
+
+
+     end;
+       // Sepetteki yalnýzca 1. ürün alaný doluysa;
+       if (gly_sepetUrunBir.Images <> nil ) AND (gly_sepetUrunIki.Images = nil) then
+            begin
+                ShowMessage('Bir dolu iki boþ');
+            end;
+         // Sepetteki yalnýzca 2. ürün alaný doluysa;
+         if (gly_sepetUrunBir.Images = nil ) AND (gly_sepetUrunIki.Images <> nil) then
+                begin
+                         ShowMessage('Bir Boþ Ýki Dolu');
+                end;
+           // Sepet boþsa ;
+           if (gly_sepetUrunBir.Images = nil) AND (gly_sepetUrunIki = nil) then
+                   begin
+                        ShowMessage('Sepetinde ürün yok !');
+                   end;
+
+end;
+
 procedure TuAna.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 
@@ -1345,6 +1417,19 @@ var
   I: Integer;
 begin
   tabcontrol_Menu.ActiveTab := tabUrunler;
+
+  MSQuery4.Close;
+  MSQuery4.SQL.Clear;
+  MSQuery4.SQL.BeginUpdate;
+  MSQuery4.SQL.Add('SELECT * FROM kullanicilar WHERE aktif=1');
+  MSQuery4.SQL.EndUpdate;
+  MSQuery4.Open;
+
+  //ShowMessage(MSQuery4.Fields[0].AsString);
+  aktifKullanici := MSQuery4.Fields[0].AsString;
+
+
+
 end;
 
 procedure TuAna.FormGesture(Sender: TObject;
