@@ -480,6 +480,7 @@ begin
           gly_sepetUrunBir.Images:= ImageList1;
           gly_sepetUrunBir.ImageIndex := 1;
           lbl_SepetUrunBirAdi.Text := lbl_urunIkiAdi.Text;
+          lbl_SepetUrunBirFiyat.Text := lbl_urunIkiFiyat.Text;
             ShowMessage('Eklendi.');
             spin_urunBir.Value := spin_urunBir.Value + 1;
 
@@ -505,6 +506,7 @@ begin
          gly_sepetUrunBir.Images:= ImageList2;
          gly_sepetUrunBir.ImageIndex := 1;
          lbl_SepetUrunBirAdi.Text := lbl_urunIkiAdi.Text;
+         lbl_SepetUrunBirFiyat.Text := lbl_urunIkiFiyat.Text;
          ShowMessage('Eklendi.');
          spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -536,6 +538,7 @@ begin
           gly_sepetUrunIki.Images:= ImageList1;
           gly_sepetUrunIki.ImageIndex := 1;
           lbl_SepetUrunIkiAdi.Text := lbl_urunIkiAdi.Text;
+          lbl_SepetUrunIkiFiyat.Text := lbl_urunIkiFiyat.Text;
           ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -560,6 +563,7 @@ begin
          gly_sepetUrunIki.Images:= ImageList2;
          gly_sepetUrunIki.ImageIndex := 1;
          lbl_SepetUrunIkiAdi.Text := lbl_urunIkiAdi.Text;
+         lbl_SepetUrunIkiFiyat.Text := lbl_urunIkiFiyat.Text;
          ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -641,6 +645,7 @@ begin
           gly_sepetUrunBir.Images:= ImageList1;
           gly_sepetUrunBir.ImageIndex := 2;
           lbl_SepetUrunBirAdi.Text := lbl_urunUcAdi.Text;
+          lbl_SepetUrunBirFiyat.Text := lbl_urunUcFiyat.Text;
             ShowMessage('Eklendi.');
             spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -666,6 +671,7 @@ begin
          gly_sepetUrunBir.Images:= ImageList2;
          gly_sepetUrunBir.ImageIndex := 2;
          lbl_SepetUrunBirAdi.Text := lbl_urunUcAdi.Text;
+         lbl_SepetUrunBirFiyat.Text := lbl_urunUcFiyat.Text;
          ShowMessage('Eklendi.');
          spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -694,6 +700,7 @@ begin
           gly_sepetUrunIki.Images:= ImageList1;
           gly_sepetUrunIki.ImageIndex := 2;
           lbl_SepetUrunIkiAdi.Text := lbl_urunUcAdi.Text;
+          lbl_SepetUrunIkiFiyat.Text := lbl_urunUcFiyat.Text;
           ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -717,6 +724,7 @@ begin
          gly_sepetUrunIki.Images:= ImageList2;
          gly_sepetUrunIki.ImageIndex := 2;
          lbl_SepetUrunIkiAdi.Text := lbl_urunUcAdi.Text;
+         lbl_SepetUrunIkiFiyat.Text := lbl_urunUcFiyat.Text;
          ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -798,6 +806,7 @@ begin
           gly_sepetUrunBir.Images:= ImageList1;
           gly_sepetUrunBir.ImageIndex := 3;
           lbl_SepetUrunBirAdi.Text := lbl_urunDortAdi.Text;
+          lbl_SepetUrunBirFiyat.Text := lbl_urunDortFiyat.Text;
             ShowMessage('Eklendi.');
             spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -823,6 +832,7 @@ begin
          gly_sepetUrunBir.Images:= ImageList2;
          gly_sepetUrunBir.ImageIndex := 3;
          lbl_SepetUrunBirAdi.Text := lbl_urunDortAdi.Text;
+         lbl_SepetUrunBirFiyat.Text := lbl_urunDortFiyat.Text;
          ShowMessage('Eklendi.');
          spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -851,6 +861,7 @@ begin
           gly_sepetUrunIki.Images:= ImageList1;
           gly_sepetUrunIki.ImageIndex := 3;
           lbl_SepetUrunIkiAdi.Text := lbl_urunDortAdi.Text;
+          lbl_SepetUrunIkiFiyat.Text := lbl_urunDortFiyat.Text;
           ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -874,6 +885,7 @@ begin
          gly_sepetUrunIki.Images:= ImageList2;
          gly_sepetUrunIki.ImageIndex := 3;
          lbl_SepetUrunIkiAdi.Text := lbl_urunDortAdi.Text;
+         lbl_SepetUrunIkiFiyat.Text := lbl_urunDortFiyat.Text;
          ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -955,6 +967,7 @@ begin
           gly_sepetUrunBir.Images:= ImageList1;
           gly_sepetUrunBir.ImageIndex := 4;
           lbl_SepetUrunBirAdi.Text := lbl_urunBesAdi.Text;
+          lbl_SepetUrunBirFiyat.Text := lbl_urunBesFiyat.Text;
             ShowMessage('Eklendi.');
             spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -980,6 +993,7 @@ begin
          gly_sepetUrunBir.Images:= ImageList2;
          gly_sepetUrunBir.ImageIndex := 4;
          lbl_SepetUrunBirAdi.Text := lbl_urunBesAdi.Text;
+         lbl_SepetUrunBirFiyat.Text := lbl_urunBesFiyat.Text;
          ShowMessage('Eklendi.');
          spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -1008,6 +1022,7 @@ begin
           gly_sepetUrunIki.Images:= ImageList1;
           gly_sepetUrunIki.ImageIndex := 4;
           lbl_SepetUrunIkiAdi.Text := lbl_urunBesAdi.Text;
+          lbl_SepetUrunIkiFiyat.Text := lbl_urunBesFiyat.Text;
           ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -1031,6 +1046,7 @@ begin
          gly_sepetUrunIki.Images:= ImageList2;
          gly_sepetUrunIki.ImageIndex := 4;
          lbl_SepetUrunIkiAdi.Text := lbl_urunBesAdi.Text;
+         lbl_SepetUrunIkiFiyat.Text := lbl_urunBesFiyat.Text;
          ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -1113,6 +1129,7 @@ begin
           gly_sepetUrunBir.Images:= ImageList1;
           gly_sepetUrunBir.ImageIndex := 5;
           lbl_SepetUrunBirAdi.Text := lbl_urunAltiAdi.Text;
+          lbl_SepetUrunBirFiyat.Text := lbl_urunAltiFiyat.Text;
             ShowMessage('Eklendi.');
             spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -1138,6 +1155,7 @@ begin
          gly_sepetUrunBir.Images:= ImageList2;
          gly_sepetUrunBir.ImageIndex := 5;
          lbl_SepetUrunBirAdi.Text := lbl_urunAltiAdi.Text;
+         lbl_SepetUrunBirFiyat.Text := lbl_urunAltiFiyat.Text;
          ShowMessage('Eklendi.');
          spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -1166,6 +1184,7 @@ begin
           gly_sepetUrunIki.Images:= ImageList1;
           gly_sepetUrunIki.ImageIndex := 5;
           lbl_SepetUrunIkiAdi.Text := lbl_urunAltiAdi.Text;
+          lbl_SepetUrunIkiFiyat.Text := lbl_urunAltiFiyat.Text;
           ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -1189,6 +1208,7 @@ begin
          gly_sepetUrunIki.Images:= ImageList2;
          gly_sepetUrunIki.ImageIndex := 5;
          lbl_SepetUrunIkiAdi.Text := lbl_urunAltiAdi.Text;
+         lbl_SepetUrunIkiFiyat.Text := lbl_urunAltiFiyat.Text;
          ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -1368,17 +1388,59 @@ begin
         MSQuery5.Execute;
 
 
+        MSQuery5.Close;
+        MSQuery5.SQL.Clear;
+        MSQuery5.SQL.BeginUpdate;
+        MSQuery5.SQL.Add('INSERT INTO sepet (urunAdi,kullaniciAdi,adet,imageList,imageIndex,fiyat) VALUES (:urunAdi,:kullaniciAdi,:adet,:imageList,:imageIndex,:fiyat)');
+        MSQuery5.SQL.EndUpdate;
+        MSQuery5.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
+        MSQuery5.Params.ParamByName('kullaniciAdi').Value := aktifKullanici;
+        MSQuery5.Params.ParamByName('adet').Value := spin_urunIki.Value;
+        MSQuery5.Params.ParamByName('imageList').Value := gly_sepetUrunIki.Images.Name;
+        MSQuery5.Params.ParamByName('imageIndex').Value := gly_sepetUrunIki.ImageIndex;
+        MSQuery5.Params.ParamByName('fiyat').Value := lbl_SepetUrunIkiFiyat.Text.ToInteger;
+        MSQuery5.Execute;
+
+
 
      end;
        // Sepetteki yalnýzca 1. ürün alaný doluysa;
        if (gly_sepetUrunBir.Images <> nil ) AND (gly_sepetUrunIki.Images = nil) then
             begin
                 ShowMessage('Bir dolu iki boþ');
+
+                MSQuery5.Close;
+                MSQuery5.SQL.Clear;
+                MSQuery5.SQL.BeginUpdate;
+                MSQuery5.SQL.Add('INSERT INTO sepet (urunAdi,kullaniciAdi,adet,imageList,imageIndex,fiyat) VALUES (:urunAdi,:kullaniciAdi,:adet,:imageList,:imageIndex,:fiyat)');
+                MSQuery5.SQL.EndUpdate;
+                MSQuery5.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+                MSQuery5.Params.ParamByName('kullaniciAdi').Value := aktifKullanici;
+                MSQuery5.Params.ParamByName('adet').Value := spin_urunBir.Value;
+                MSQuery5.Params.ParamByName('imageList').Value := gly_sepetUrunBir.Images.Name;
+                MSQuery5.Params.ParamByName('imageIndex').Value := gly_sepetUrunBir.ImageIndex;
+                MSQuery5.Params.ParamByName('fiyat').Value := lbl_SepetUrunBirFiyat.Text.ToInteger;
+                MSQuery5.Execute;
+
             end;
          // Sepetteki yalnýzca 2. ürün alaný doluysa;
          if (gly_sepetUrunBir.Images = nil ) AND (gly_sepetUrunIki.Images <> nil) then
                 begin
                          ShowMessage('Bir Boþ Ýki Dolu');
+                         MSQuery5.Close;
+                         MSQuery5.SQL.Clear;
+                         MSQuery5.SQL.BeginUpdate;
+                         MSQuery5.SQL.Add('INSERT INTO sepet (urunAdi,kullaniciAdi,adet,imageList,imageIndex,fiyat) VALUES (:urunAdi,:kullaniciAdi,:adet,:imageList,:imageIndex,:fiyat)');
+                         MSQuery5.SQL.EndUpdate;
+                         MSQuery5.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
+                         MSQuery5.Params.ParamByName('kullaniciAdi').Value := aktifKullanici;
+                         MSQuery5.Params.ParamByName('adet').Value := spin_urunIki.Value;
+                         MSQuery5.Params.ParamByName('imageList').Value := gly_sepetUrunIki.Images.Name;
+                         MSQuery5.Params.ParamByName('imageIndex').Value := gly_sepetUrunIki.ImageIndex;
+                         MSQuery5.Params.ParamByName('fiyat').Value := lbl_SepetUrunIkiFiyat.Text.ToInteger;
+                         MSQuery5.Execute;
+
+
                 end;
            // Sepet boþsa ;
            if (gly_sepetUrunBir.Images = nil) AND (gly_sepetUrunIki = nil) then
@@ -2114,7 +2176,7 @@ procedure TuAna.spin_urunBirChange(Sender: TObject);
 begin
      if gly_sepetUrunBir.Images <> nil then
      begin
-            MSQuery1.Close;
+          (*  MSQuery1.Close;
             MSQuery1.SQL.Clear;
             MSQuery1.SQL.BeginUpdate;
             MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
@@ -2123,7 +2185,7 @@ begin
             MSQuery1.Open;
 
             toplamfiyat :=MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger;
-            lbl_sepetToplamFiyat.Text := toplamfiyat.ToString;
+            lbl_sepetToplamFiyat.Text := toplamfiyat.ToString;    *)
      end;
 
 
@@ -2143,7 +2205,7 @@ procedure TuAna.spin_urunIkiChange(Sender: TObject);
 begin
      if gly_sepetUrunIki.Images <> nil then
      begin
-            MSQuery1.Close;
+        (*    MSQuery1.Close;
             MSQuery1.SQL.Clear;
             MSQuery1.SQL.BeginUpdate;
             MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
@@ -2152,7 +2214,7 @@ begin
             MSQuery1.Open;
 
             toplamfiyat :=MSQuery1.Fields[3].AsInteger * spin_urunIki.Text.ToInteger;
-            lbl_sepetToplamFiyat.Text := toplamfiyat.ToString;
+            lbl_sepetToplamFiyat.Text := toplamfiyat.ToString;   *)
      end;
 
 
