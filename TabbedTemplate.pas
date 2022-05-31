@@ -185,14 +185,19 @@ type
     Button6: TButton;
     btn_hesapAltCikis: TButton;
     MSQuery5: TMSQuery;
+    lbl_SepetUrunBirFiyat: TLabel;
+    lbl_SepetUrunIkiFiyat: TLabel;
+    lbl_SepetUrunBirKatAdi: TLabel;
+    lbl_SepetUrunIkiKatAdi: TLabel;
     MSQuery5urunAdi: TStringField;
     MSQuery5kullaniciAdi: TStringField;
     MSQuery5adet: TIntegerField;
     MSQuery5fiyat: TSmallintField;
     MSQuery5imageList: TStringField;
     MSQuery5imageIndex: TSmallintField;
-    lbl_SepetUrunBirFiyat: TLabel;
-    lbl_SepetUrunIkiFiyat: TLabel;
+    MSQuery5urunAlani: TByteField;
+    MSQuery5urunKategori: TStringField;
+    MSQuery5urunOzellik: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -237,6 +242,8 @@ type
   urunid : Integer;
   toplamfiyat: Integer;
   aktifKullanici : string;
+  sepetUrunBirFiyat : Integer;
+  sepetUrunIkiFiyat : Integer;
     { Public declarations }
   end;
 
@@ -313,6 +320,7 @@ begin
           gly_sepetUrunBir.ImageIndex := 0;
           lbl_SepetUrunBirAdi.Text := lbl_urunBirAdi.Text;
           lbl_SepetUrunBirFiyat.Text := lbl_urunBirFiyat.Text;
+          lbl_SepetUrunBirKatAdi.Text := 'Araba';
             ShowMessage('Eklendi.');
             spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -338,6 +346,7 @@ begin
          gly_sepetUrunBir.ImageIndex := 0;
          lbl_SepetUrunBirAdi.Text := lbl_urunBirAdi.Text;
          lbl_SepetUrunBirFiyat.Text := lbl_urunBirFiyat.Text;
+         lbl_SepetUrunBirKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
          spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -368,6 +377,7 @@ begin
           gly_sepetUrunIki.ImageIndex := 0;
           lbl_SepetUrunIkiAdi.Text := lbl_urunBirAdi.Text;
           lbl_SepetUrunIkiFiyat.Text := lbl_urunBirFiyat.Text;
+          lbl_SepetUrunIkiKatAdi.Text := 'Araba';
           ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -392,6 +402,7 @@ begin
          gly_sepetUrunIki.ImageIndex := 0;
          lbl_SepetUrunIkiAdi.Text := lbl_urunBirAdi.Text;
          lbl_SepetUrunIkiFiyat.Text := lbl_urunBirFiyat.Text;
+         lbl_SepetUrunIkiKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -409,26 +420,6 @@ begin
          end;
         end;
 
-
-         (*
-        if (lbl_SepetUrunBirAdi.Text) <> '' then
-        begin
-           MSQuery1.Close;
-           MSQuery1.SQL.Clear;
-           MSQuery1.SQL.BeginUpdate;
-           MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
-           MSQuery1.SQL.EndUpdate;
-           MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
-           MSQuery1.Open;
-
-           toplamfiyat := MSQuery1.Fields[3].AsInteger;
-           ShowMessage(toplamfiyat.ToString);
-           lbl_sepetToplamFiyat.Text := toplamfiyat.ToString;
-
-           //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
-
-        end;
-              *)
 
 
 
@@ -481,6 +472,7 @@ begin
           gly_sepetUrunBir.ImageIndex := 1;
           lbl_SepetUrunBirAdi.Text := lbl_urunIkiAdi.Text;
           lbl_SepetUrunBirFiyat.Text := lbl_urunIkiFiyat.Text;
+          lbl_SepetUrunBirKatAdi.Text := 'Araba';
             ShowMessage('Eklendi.');
             spin_urunBir.Value := spin_urunBir.Value + 1;
 
@@ -507,6 +499,7 @@ begin
          gly_sepetUrunBir.ImageIndex := 1;
          lbl_SepetUrunBirAdi.Text := lbl_urunIkiAdi.Text;
          lbl_SepetUrunBirFiyat.Text := lbl_urunIkiFiyat.Text;
+         lbl_SepetUrunBirKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
          spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -539,6 +532,7 @@ begin
           gly_sepetUrunIki.ImageIndex := 1;
           lbl_SepetUrunIkiAdi.Text := lbl_urunIkiAdi.Text;
           lbl_SepetUrunIkiFiyat.Text := lbl_urunIkiFiyat.Text;
+          lbl_SepetUrunIkiKatAdi.Text := 'Araba';
           ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -564,6 +558,7 @@ begin
          gly_sepetUrunIki.ImageIndex := 1;
          lbl_SepetUrunIkiAdi.Text := lbl_urunIkiAdi.Text;
          lbl_SepetUrunIkiFiyat.Text := lbl_urunIkiFiyat.Text;
+         lbl_SepetUrunIkiKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -582,20 +577,6 @@ begin
         end;
 
 
-
-
-
-   (*
-   MSQuery1.Close;
-   MSQuery1.SQL.Clear;
-   MSQuery1.SQL.BeginUpdate;
-   MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
-   MSQuery1.SQL.EndUpdate;
-   MSQuery1.Params.ParamByName('urunAdi').Value := 'BMW';
-   MSQuery1.Open;    *)
-
-
-   //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
 
 end;
 
@@ -646,6 +627,7 @@ begin
           gly_sepetUrunBir.ImageIndex := 2;
           lbl_SepetUrunBirAdi.Text := lbl_urunUcAdi.Text;
           lbl_SepetUrunBirFiyat.Text := lbl_urunUcFiyat.Text;
+          lbl_SepetUrunBirKatAdi.Text := 'Araba';
             ShowMessage('Eklendi.');
             spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -672,6 +654,7 @@ begin
          gly_sepetUrunBir.ImageIndex := 2;
          lbl_SepetUrunBirAdi.Text := lbl_urunUcAdi.Text;
          lbl_SepetUrunBirFiyat.Text := lbl_urunUcFiyat.Text;
+         lbl_SepetUrunBirKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
          spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -701,6 +684,7 @@ begin
           gly_sepetUrunIki.ImageIndex := 2;
           lbl_SepetUrunIkiAdi.Text := lbl_urunUcAdi.Text;
           lbl_SepetUrunIkiFiyat.Text := lbl_urunUcFiyat.Text;
+          lbl_SepetUrunIkiKatAdi.Text := 'Araba';
           ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -725,6 +709,7 @@ begin
          gly_sepetUrunIki.ImageIndex := 2;
          lbl_SepetUrunIkiAdi.Text := lbl_urunUcAdi.Text;
          lbl_SepetUrunIkiFiyat.Text := lbl_urunUcFiyat.Text;
+         lbl_SepetUrunIkiKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -745,19 +730,6 @@ begin
 
 
 
-
-    (*
-
-   MSQuery1.Close;
-   MSQuery1.SQL.Clear;
-   MSQuery1.SQL.BeginUpdate;
-   MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
-   MSQuery1.SQL.EndUpdate;
-   MSQuery1.Params.ParamByName('urunAdi').Value := 'BMW';
-   MSQuery1.Open;     *)
-
-
-   //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
 
 
 
@@ -807,6 +779,7 @@ begin
           gly_sepetUrunBir.ImageIndex := 3;
           lbl_SepetUrunBirAdi.Text := lbl_urunDortAdi.Text;
           lbl_SepetUrunBirFiyat.Text := lbl_urunDortFiyat.Text;
+          lbl_SepetUrunBirKatAdi.Text := 'Araba';
             ShowMessage('Eklendi.');
             spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -833,6 +806,7 @@ begin
          gly_sepetUrunBir.ImageIndex := 3;
          lbl_SepetUrunBirAdi.Text := lbl_urunDortAdi.Text;
          lbl_SepetUrunBirFiyat.Text := lbl_urunDortFiyat.Text;
+         lbl_SepetUrunBirKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
          spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -862,6 +836,7 @@ begin
           gly_sepetUrunIki.ImageIndex := 3;
           lbl_SepetUrunIkiAdi.Text := lbl_urunDortAdi.Text;
           lbl_SepetUrunIkiFiyat.Text := lbl_urunDortFiyat.Text;
+          lbl_SepetUrunIkiKatAdi.Text := 'Araba';
           ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -886,6 +861,7 @@ begin
          gly_sepetUrunIki.ImageIndex := 3;
          lbl_SepetUrunIkiAdi.Text := lbl_urunDortAdi.Text;
          lbl_SepetUrunIkiFiyat.Text := lbl_urunDortFiyat.Text;
+         lbl_SepetUrunIkiKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -905,20 +881,6 @@ begin
         end;
 
 
-
-
-    (*
-
-   MSQuery1.Close;
-   MSQuery1.SQL.Clear;
-   MSQuery1.SQL.BeginUpdate;
-   MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
-   MSQuery1.SQL.EndUpdate;
-   MSQuery1.Params.ParamByName('urunAdi').Value := 'BMW';
-   MSQuery1.Open;     *)
-
-
-   //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
 
 
 
@@ -968,6 +930,7 @@ begin
           gly_sepetUrunBir.ImageIndex := 4;
           lbl_SepetUrunBirAdi.Text := lbl_urunBesAdi.Text;
           lbl_SepetUrunBirFiyat.Text := lbl_urunBesFiyat.Text;
+          lbl_SepetUrunBirKatAdi.Text := 'Araba';
             ShowMessage('Eklendi.');
             spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -994,6 +957,7 @@ begin
          gly_sepetUrunBir.ImageIndex := 4;
          lbl_SepetUrunBirAdi.Text := lbl_urunBesAdi.Text;
          lbl_SepetUrunBirFiyat.Text := lbl_urunBesFiyat.Text;
+         lbl_SepetUrunBirKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
          spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -1023,6 +987,7 @@ begin
           gly_sepetUrunIki.ImageIndex := 4;
           lbl_SepetUrunIkiAdi.Text := lbl_urunBesAdi.Text;
           lbl_SepetUrunIkiFiyat.Text := lbl_urunBesFiyat.Text;
+          lbl_SepetUrunIkiKatAdi.Text := 'Araba';
           ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -1047,6 +1012,7 @@ begin
          gly_sepetUrunIki.ImageIndex := 4;
          lbl_SepetUrunIkiAdi.Text := lbl_urunBesAdi.Text;
          lbl_SepetUrunIkiFiyat.Text := lbl_urunBesFiyat.Text;
+         lbl_SepetUrunIkiKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -1065,21 +1031,6 @@ begin
          end;
         end;
 
-
-
-
-    (*
-
-   MSQuery1.Close;
-   MSQuery1.SQL.Clear;
-   MSQuery1.SQL.BeginUpdate;
-   MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
-   MSQuery1.SQL.EndUpdate;
-   MSQuery1.Params.ParamByName('urunAdi').Value := 'BMW';
-   MSQuery1.Open;     *)
-
-
-   //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
 
 
 end;
@@ -1130,6 +1081,7 @@ begin
           gly_sepetUrunBir.ImageIndex := 5;
           lbl_SepetUrunBirAdi.Text := lbl_urunAltiAdi.Text;
           lbl_SepetUrunBirFiyat.Text := lbl_urunAltiFiyat.Text;
+          lbl_SepetUrunBirKatAdi.Text := 'Araba';
             ShowMessage('Eklendi.');
             spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -1156,6 +1108,7 @@ begin
          gly_sepetUrunBir.ImageIndex := 5;
          lbl_SepetUrunBirAdi.Text := lbl_urunAltiAdi.Text;
          lbl_SepetUrunBirFiyat.Text := lbl_urunAltiFiyat.Text;
+         lbl_SepetUrunBirKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
          spin_urunBir.Value := spin_urunBir.Value + 1 ;
 
@@ -1185,6 +1138,7 @@ begin
           gly_sepetUrunIki.ImageIndex := 5;
           lbl_SepetUrunIkiAdi.Text := lbl_urunAltiAdi.Text;
           lbl_SepetUrunIkiFiyat.Text := lbl_urunAltiFiyat.Text;
+          lbl_SepetUrunIkiKatAdi.Text := 'Araba';
           ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -1209,6 +1163,7 @@ begin
          gly_sepetUrunIki.ImageIndex := 5;
          lbl_SepetUrunIkiAdi.Text := lbl_urunAltiAdi.Text;
          lbl_SepetUrunIkiFiyat.Text := lbl_urunAltiFiyat.Text;
+         lbl_SepetUrunIkiKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
             spin_urunIki.Value := spin_urunIki.Value + 1 ;
 
@@ -1228,21 +1183,6 @@ begin
         end;
 
 
-
-
-    (*
-
-   MSQuery1.Close;
-   MSQuery1.SQL.Clear;
-   MSQuery1.SQL.BeginUpdate;
-   MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
-   MSQuery1.SQL.EndUpdate;
-   MSQuery1.Params.ParamByName('urunAdi').Value := 'BMW';
-   MSQuery1.Open;     *)
-
-
-   //lbl_sepetToplamFiyat.Text :=IntToStr(MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger);
-
 end;
 
 
@@ -1259,6 +1199,7 @@ begin
          MSQuery4.Execute;
 
          aktifKullanici := '';
+         Close;
 end;
 
 procedure TuAna.btn_hesapAltGirisClick(Sender: TObject);
@@ -1287,6 +1228,7 @@ begin
     else
     begin
          // Eðer giriþ yapýldýysa ;
+         sepet_AltPanel.Visible := true;
 
          MSQuery4.Close;
          MSQuery4.SQL.Clear;
@@ -1299,6 +1241,212 @@ begin
          ShowMessage('Giris yapildi. ' + 'Hoþgeldin ' + edit_hesapOrtaNickname.Text);
          tabcontrol_Menu.TabIndex := 2;
          btn_urunlerGiris.Visible := False;
+         aktifKullanici := edit_hesapOrtaNickname.Text;
+
+
+
+
+
+       MSQuery5.Close;
+       MSQuery5.SQL.Clear;
+       MSQuery5.SQL.BeginUpdate;
+       MSQuery5.SQL.Add('SELECT TOP 2 * FROM sepet WHERE kullaniciAdi=:kullaniciAdi');
+       MSQuery5.SQL.EndUpdate;
+       MSQuery5.Params.ParamByName('kullaniciAdi').Value := edit_hesapOrtaNickname.Text;
+       MSQuery5.Open;
+
+
+
+       // Eðer kullanýcýya ait iki kayýt varsa ;
+
+       if MSQuery5.RecordCount = 2 then
+       begin
+           // 1. sepet alaný kodlarý
+       MSQuery5.Close;
+       MSQuery5.SQL.Clear;
+       MSQuery5.SQL.BeginUpdate;
+       MSQuery5.SQL.Add('SELECT TOP 1 * FROM sepet WHERE kullaniciAdi=:kullaniciAdi AND urunAlani=1');
+       MSQuery5.SQL.EndUpdate;
+       MSQuery5.Params.ParamByName('kullaniciAdi').Value := edit_hesapOrtaNickname.Text;
+       MSQuery5.Open;
+
+           sepet_urunBir.Visible := true;
+           gly_sepetUrunBir.ImageIndex := MSQuery5.Fields[5].AsInteger;
+           lbl_SepetUrunBirAdi.Text := MSQuery5.Fields[0].AsString;
+           lbl_SepetUrunBirFiyat.Text := MSQuery5.Fields[3].AsString;
+           spin_urunBir.Value := MSQuery5.Fields[2].AsInteger;
+           txt_urunBirDetail.Text := MSQuery5.Fields[8].AsString;
+           lbl_SepetUrunBirKatAdi.Text := MSQuery5.Fields[7].AsString;
+
+           if MSQuery5.Fields[7].AsString = 'Araba' then
+           begin
+             gly_sepetUrunBir.Images := ImageList1;
+           end
+           else if MSQuery5.Fields[7].AsString = 'Elektronik' then
+               begin
+                    gly_sepetUrunBir.Images := ImageList2;
+               end;
+
+
+               // toplam fiyat kodlarý
+
+
+               MSQuery1.Close;
+               MSQuery1.SQL.Clear;
+               MSQuery1.SQL.BeginUpdate;
+               MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
+               MSQuery1.SQL.EndUpdate;
+               MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+               MSQuery1.Open;
+
+               sepetUrunBirFiyat := MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger;
+               lbl_sepetToplamFiyat.Text := IntToStr(sepetUrunBirFiyat + sepetUrunIkiFiyat);
+
+
+
+
+
+           // 2. sepet alaný kodlarý
+
+           sepet_urunIki.Visible := true;
+           MSQuery5.Close;
+           MSQuery5.SQL.Clear;
+           MSQuery5.SQL.BeginUpdate;
+           MSQuery5.SQL.Add('SELECT TOP 1 * FROM sepet WHERE kullaniciAdi=:kullaniciAdi AND urunAlani=2');
+           MSQuery5.SQL.EndUpdate;
+           MSQuery5.Params.ParamByName('kullaniciAdi').Value := edit_hesapOrtaNickname.Text;
+           MSQuery5.Open;
+
+
+           gly_sepetUrunIki.ImageIndex := MSQuery5.Fields[5].AsInteger;
+           lbl_SepetUrunIkiAdi.Text := MSQuery5.Fields[0].AsString;
+           lbl_SepetUrunIkiFiyat.Text := MSQuery5.Fields[3].AsString;
+           spin_urunIki.Value := MSQuery5.Fields[2].AsInteger;
+           txt_urunIkiDetail.Text := MSQuery5.Fields[8].AsString;
+           lbl_SepetUrunIkiKatAdi.Text := MSQuery5.Fields[7].AsString;
+
+           if MSQuery5.Fields[7].AsString = 'Araba' then
+           begin
+             gly_sepetUrunIki.Images := ImageList1;
+           end
+           else if MSQuery5.Fields[7].AsString = 'Elektronik' then
+               begin
+                    gly_sepetUrunIki.Images := ImageList2;
+               end;
+
+
+
+               // toplam fiyat kodlarý
+
+
+               MSQuery1.Close;
+               MSQuery1.SQL.Clear;
+               MSQuery1.SQL.BeginUpdate;
+               MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
+               MSQuery1.SQL.EndUpdate;
+               MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
+               MSQuery1.Open;
+
+               sepetUrunIkiFiyat := MSQuery1.Fields[3].AsInteger * spin_urunIki.Text.ToInteger;
+               lbl_sepetToplamFiyat.Text := IntToStr(sepetUrunBirFiyat + sepetUrunIkiFiyat);
+
+
+       end
+       else if MSQuery5.RecordCount = 1 then
+            begin
+
+              MSQuery5.Close;
+              MSQuery5.SQL.Clear;
+              MSQuery5.SQL.BeginUpdate;
+              MSQuery5.SQL.Add('SELECT TOP 1 * FROM sepet WHERE kullaniciAdi=:kullaniciAdi');
+              MSQuery5.SQL.EndUpdate;
+              MSQuery5.Params.ParamByName('kullaniciAdi').Value := edit_hesapOrtaNickname.Text;
+              MSQuery5.Open;
+
+              if MSQuery5.Fields[6].Value = 1 then
+              begin
+                  sepet_urunBir.Visible := true;
+                  gly_sepetUrunBir.ImageIndex := MSQuery5.Fields[5].AsInteger;
+                  lbl_SepetUrunBirAdi.Text := MSQuery5.Fields[0].AsString;
+                  lbl_SepetUrunBirFiyat.Text := MSQuery5.Fields[3].AsString;
+                  spin_urunBir.Value := MSQuery5.Fields[2].AsInteger;
+                  txt_urunBirDetail.Text := MSQuery5.Fields[8].AsString;
+                  lbl_SepetUrunBirKatAdi.Text := MSQuery5.Fields[7].AsString;
+
+                 if MSQuery5.Fields[7].AsString = 'Araba' then
+                 begin
+                   gly_sepetUrunBir.Images := ImageList1;
+                 end
+
+                 else if MSQuery5.Fields[7].AsString = 'Elektronik' then
+                     begin
+                          gly_sepetUrunBir.Images := ImageList2;
+                     end;
+                    end;
+
+
+               // toplam fiyat kodlarý
+
+
+               MSQuery1.Close;
+               MSQuery1.SQL.Clear;
+               MSQuery1.SQL.BeginUpdate;
+               MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
+               MSQuery1.SQL.EndUpdate;
+               MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
+               MSQuery1.Open;
+
+               sepetUrunBirFiyat := MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger;
+               lbl_sepetToplamFiyat.Text := IntToStr(sepetUrunBirFiyat + sepetUrunIkiFiyat);
+
+
+            end
+            else if MSQuery5.Fields[6].Value = 2 then
+                 begin
+                  gly_sepetUrunIki.ImageIndex := MSQuery5.Fields[5].AsInteger;
+                  lbl_SepetUrunIkiAdi.Text := MSQuery5.Fields[0].AsString;
+                  lbl_SepetUrunIkiFiyat.Text := MSQuery5.Fields[3].AsString;
+                  spin_urunIki.Value := MSQuery5.Fields[2].AsInteger;
+                  txt_urunIkiDetail.Text := MSQuery5.Fields[8].AsString;
+                  lbl_SepetUrunIkiKatAdi.Text := MSQuery5.Fields[7].AsString;
+
+                   if MSQuery5.Fields[7].AsString = 'Araba' then
+                   begin
+                     gly_sepetUrunIki.Images := ImageList1;
+                   end
+                   else if MSQuery5.Fields[7].AsString = 'Elektronik' then
+                       begin
+                            gly_sepetUrunIki.Images := ImageList2;
+                       end;
+                                // toplam fiyat kodlarý
+
+
+                                MSQuery1.Close;
+                                MSQuery1.SQL.Clear;
+                                MSQuery1.SQL.BeginUpdate;
+                                MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
+                                MSQuery1.SQL.EndUpdate;
+                                MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
+                                MSQuery1.Open;
+
+                                sepetUrunIkiFiyat := MSQuery1.Fields[3].AsInteger * spin_urunIki.Text.ToInteger;
+                                lbl_sepetToplamFiyat.Text := IntToStr(sepetUrunBirFiyat + sepetUrunIkiFiyat);
+
+
+
+                 end;
+
+
+
+
+
+
+
+
+
+
+
+
     end;
     
     
@@ -1377,7 +1525,7 @@ begin
         MSQuery5.Close;
         MSQuery5.SQL.Clear;
         MSQuery5.SQL.BeginUpdate;
-        MSQuery5.SQL.Add('INSERT INTO sepet (urunAdi,kullaniciAdi,adet,imageList,imageIndex,fiyat) VALUES (:urunAdi,:kullaniciAdi,:adet,:imageList,:imageIndex,:fiyat)');
+        MSQuery5.SQL.Add('INSERT INTO sepet (urunAdi,kullaniciAdi,adet,imageList,imageIndex,fiyat,urunAlani,urunKategori,urunOzellik) VALUES (:urunAdi,:kullaniciAdi,:adet,:imageList,:imageIndex,:fiyat,:urunAlani,:urunKategori,:urunOzellik)');
         MSQuery5.SQL.EndUpdate;
         MSQuery5.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
         MSQuery5.Params.ParamByName('kullaniciAdi').Value := aktifKullanici;
@@ -1385,13 +1533,16 @@ begin
         MSQuery5.Params.ParamByName('imageList').Value := gly_sepetUrunBir.Images.Name;
         MSQuery5.Params.ParamByName('imageIndex').Value := gly_sepetUrunBir.ImageIndex;
         MSQuery5.Params.ParamByName('fiyat').Value := lbl_SepetUrunBirFiyat.Text.ToInteger;
+        MSQuery5.Params.ParamByName('urunKategori').Value := lbl_SepetUrunBirKatAdi.Text;
+        MSQuery5.Params.ParamByName('urunOzellik').Value := txt_urunBirDetail.Text;
+        MSQuery5.Params.ParamByName('urunAlani').Value := 1;
         MSQuery5.Execute;
 
 
         MSQuery5.Close;
         MSQuery5.SQL.Clear;
         MSQuery5.SQL.BeginUpdate;
-        MSQuery5.SQL.Add('INSERT INTO sepet (urunAdi,kullaniciAdi,adet,imageList,imageIndex,fiyat) VALUES (:urunAdi,:kullaniciAdi,:adet,:imageList,:imageIndex,:fiyat)');
+        MSQuery5.SQL.Add('INSERT INTO sepet (urunAdi,kullaniciAdi,adet,imageList,imageIndex,fiyat,urunAlani,urunKategori,urunOzellik) VALUES (:urunAdi,:kullaniciAdi,:adet,:imageList,:imageIndex,:fiyat,:urunAlani,:urunKategori,:urunOzellik)');
         MSQuery5.SQL.EndUpdate;
         MSQuery5.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
         MSQuery5.Params.ParamByName('kullaniciAdi').Value := aktifKullanici;
@@ -1399,6 +1550,9 @@ begin
         MSQuery5.Params.ParamByName('imageList').Value := gly_sepetUrunIki.Images.Name;
         MSQuery5.Params.ParamByName('imageIndex').Value := gly_sepetUrunIki.ImageIndex;
         MSQuery5.Params.ParamByName('fiyat').Value := lbl_SepetUrunIkiFiyat.Text.ToInteger;
+        MSQuery5.Params.ParamByName('urunKategori').Value := lbl_SepetUrunIkiKatAdi.Text;
+        MSQuery5.Params.ParamByName('urunOzellik').Value := txt_urunIkiDetail.Text;
+        MSQuery5.Params.ParamByName('urunAlani').Value := 2;
         MSQuery5.Execute;
 
 
@@ -1412,7 +1566,7 @@ begin
                 MSQuery5.Close;
                 MSQuery5.SQL.Clear;
                 MSQuery5.SQL.BeginUpdate;
-                MSQuery5.SQL.Add('INSERT INTO sepet (urunAdi,kullaniciAdi,adet,imageList,imageIndex,fiyat) VALUES (:urunAdi,:kullaniciAdi,:adet,:imageList,:imageIndex,:fiyat)');
+                MSQuery5.SQL.Add('INSERT INTO sepet (urunAdi,kullaniciAdi,adet,imageList,imageIndex,fiyat,urunAlani,urunKategori,urunOzellik) VALUES (:urunAdi,:kullaniciAdi,:adet,:imageList,:imageIndex,:fiyat,:urunAlani,:urunKategori,:urunOzellik)');
                 MSQuery5.SQL.EndUpdate;
                 MSQuery5.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
                 MSQuery5.Params.ParamByName('kullaniciAdi').Value := aktifKullanici;
@@ -1420,25 +1574,32 @@ begin
                 MSQuery5.Params.ParamByName('imageList').Value := gly_sepetUrunBir.Images.Name;
                 MSQuery5.Params.ParamByName('imageIndex').Value := gly_sepetUrunBir.ImageIndex;
                 MSQuery5.Params.ParamByName('fiyat').Value := lbl_SepetUrunBirFiyat.Text.ToInteger;
+                MSQuery5.Params.ParamByName('urunKategori').Value := lbl_SepetUrunBirKatAdi.Text;
+                MSQuery5.Params.ParamByName('urunOzellik').Value := txt_urunBirDetail.Text;
+                MSQuery5.Params.ParamByName('urunAlani').Value := 1;
                 MSQuery5.Execute;
 
             end;
          // Sepetteki yalnýzca 2. ürün alaný doluysa;
          if (gly_sepetUrunBir.Images = nil ) AND (gly_sepetUrunIki.Images <> nil) then
                 begin
-                         ShowMessage('Bir Boþ Ýki Dolu');
-                         MSQuery5.Close;
-                         MSQuery5.SQL.Clear;
-                         MSQuery5.SQL.BeginUpdate;
-                         MSQuery5.SQL.Add('INSERT INTO sepet (urunAdi,kullaniciAdi,adet,imageList,imageIndex,fiyat) VALUES (:urunAdi,:kullaniciAdi,:adet,:imageList,:imageIndex,:fiyat)');
-                         MSQuery5.SQL.EndUpdate;
-                         MSQuery5.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
-                         MSQuery5.Params.ParamByName('kullaniciAdi').Value := aktifKullanici;
-                         MSQuery5.Params.ParamByName('adet').Value := spin_urunIki.Value;
-                         MSQuery5.Params.ParamByName('imageList').Value := gly_sepetUrunIki.Images.Name;
-                         MSQuery5.Params.ParamByName('imageIndex').Value := gly_sepetUrunIki.ImageIndex;
-                         MSQuery5.Params.ParamByName('fiyat').Value := lbl_SepetUrunIkiFiyat.Text.ToInteger;
-                         MSQuery5.Execute;
+                    ShowMessage('Bir Boþ Ýki Dolu');
+
+                    MSQuery5.Close;
+                    MSQuery5.SQL.Clear;
+                    MSQuery5.SQL.BeginUpdate;
+                    MSQuery5.SQL.Add('INSERT INTO sepet (urunAdi,kullaniciAdi,adet,imageList,imageIndex,fiyat,urunAlani,urunKategori,urunOzellik) VALUES (:urunAdi,:kullaniciAdi,:adet,:imageList,:imageIndex,:fiyat,:urunAlani,:urunKategori,:urunOzellik)');
+                    MSQuery5.SQL.EndUpdate;
+                    MSQuery5.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
+                    MSQuery5.Params.ParamByName('kullaniciAdi').Value := aktifKullanici;
+                    MSQuery5.Params.ParamByName('adet').Value := spin_urunIki.Value;
+                    MSQuery5.Params.ParamByName('imageList').Value := gly_sepetUrunIki.Images.Name;
+                    MSQuery5.Params.ParamByName('imageIndex').Value := gly_sepetUrunIki.ImageIndex;
+                    MSQuery5.Params.ParamByName('fiyat').Value := lbl_SepetUrunIkiFiyat.Text.ToInteger;
+                    MSQuery5.Params.ParamByName('urunKategori').Value := lbl_SepetUrunIkiKatAdi.Text;
+                    MSQuery5.Params.ParamByName('urunOzellik').Value := txt_urunIkiDetail.Text;
+                    MSQuery5.Params.ParamByName('urunAlani').Value := 2;
+                    MSQuery5.Execute;
 
 
                 end;
@@ -1490,6 +1651,20 @@ begin
   //ShowMessage(MSQuery4.Fields[0].AsString);
   aktifKullanici := MSQuery4.Fields[0].AsString;
 
+
+  if (gly_sepetUrunBir.Images = nil) AND (gly_sepetUrunIki.Images = nil) then
+  begin
+  sepetUrunBirFiyat := 0;
+  sepetUrunIkiFiyat := 0;
+  end
+  else if (gly_sepetUrunBir.Images <> nil) AND (gly_sepetUrunIki.Images = nil) then
+       begin
+            sepetUrunIkiFiyat := 0;
+       end
+       else if  (gly_sepetUrunBir.Images = nil) AND (gly_sepetUrunIki.Images <> nil) then
+            begin
+                 sepetUrunBirFiyat := 0;
+            end;
 
 
 end;
@@ -2176,7 +2351,7 @@ procedure TuAna.spin_urunBirChange(Sender: TObject);
 begin
      if gly_sepetUrunBir.Images <> nil then
      begin
-          (*  MSQuery1.Close;
+          MSQuery1.Close;
             MSQuery1.SQL.Clear;
             MSQuery1.SQL.BeginUpdate;
             MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
@@ -2184,8 +2359,9 @@ begin
             MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
             MSQuery1.Open;
 
-            toplamfiyat :=MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger;
-            lbl_sepetToplamFiyat.Text := toplamfiyat.ToString;    *)
+            sepetUrunBirFiyat := MSQuery1.Fields[3].AsInteger * spin_urunBir.Text.ToInteger;
+            lbl_sepetToplamFiyat.Text := IntToStr(sepetUrunBirFiyat + sepetUrunIkiFiyat);
+
      end;
 
 
@@ -2197,6 +2373,7 @@ begin
          lbl_SepetUrunBirAdi.Text := '';
          txt_urunBirDetail.Text := '';
          sepet_urunBir.Visible := false;
+         sepetUrunBirFiyat := 0;
      end;
 
 end;
@@ -2205,7 +2382,7 @@ procedure TuAna.spin_urunIkiChange(Sender: TObject);
 begin
      if gly_sepetUrunIki.Images <> nil then
      begin
-        (*    MSQuery1.Close;
+            MSQuery1.Close;
             MSQuery1.SQL.Clear;
             MSQuery1.SQL.BeginUpdate;
             MSQuery1.SQL.Add('SELECT TOP 1 * FROM urunler WHERE urunAdi=:urunAdi');
@@ -2213,8 +2390,8 @@ begin
             MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunIkiAdi.Text;
             MSQuery1.Open;
 
-            toplamfiyat :=MSQuery1.Fields[3].AsInteger * spin_urunIki.Text.ToInteger;
-            lbl_sepetToplamFiyat.Text := toplamfiyat.ToString;   *)
+            sepetUrunIkiFiyat := MSQuery1.Fields[3].AsInteger * spin_urunIki.Text.ToInteger;
+            lbl_sepetToplamFiyat.Text := IntToStr(sepetUrunBirFiyat + sepetUrunIkiFiyat);
      end;
 
 
@@ -2226,6 +2403,7 @@ begin
          lbl_SepetUrunIkiAdi.Text := '';
          txt_urunIkiDetail.Text := '';
          sepet_urunIki.Visible := false;
+         sepetUrunIkiFiyat := 0;
      end;
 end;
 
