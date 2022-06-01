@@ -1,0 +1,52 @@
+object frm_Detail: Tfrm_Detail
+  Size.Width = 358.000000000000000000
+  Size.Height = 600.000000000000000000
+  Size.PlatformDefault = False
+  object rec_Detail: TRectangle
+    Align = Client
+    Size.Width = 358.000000000000000000
+    Size.Height = 600.000000000000000000
+    Size.PlatformDefault = False
+    object lo_detailUst: TLayout
+      Align = Top
+      Size.Width = 358.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object btn_detailBack: TButton
+        Align = MostLeft
+        Size.Width = 105.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'backtoolbutton'
+        TabOrder = 0
+        Text = 'Back'
+        OnClick = btn_detailBackClick
+      end
+      object Label1: TLabel
+        Align = Client
+        Size.Width = 253.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.HorzAlign = Center
+        Text = 'Label1'
+        TabOrder = 1
+      end
+    end
+    object lo_detailOrta: TLayout
+      Align = Top
+      Position.Y = 49.000000000000000000
+      Size.Width = 358.000000000000000000
+      Size.Height = 280.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+    end
+    object txt_detailOzellik: TText
+      Align = Bottom
+      Position.Y = 328.000000000000000000
+      Size.Width = 358.000000000000000000
+      Size.Height = 272.000000000000000000
+      Size.PlatformDefault = False
+    end
+  end
+end

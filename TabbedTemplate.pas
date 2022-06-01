@@ -21,7 +21,6 @@ type
     tabHesabim: TTabItem;
     GestureManager1: TGestureManager;
     img_SideMenu: TImage;
-    img_Sepetim: TImage;
     sideMenu: TMultiView;
     Scr_urunler: TScrollBox;
     urunBir: TRectangle;
@@ -198,10 +197,15 @@ type
     MSQuery5urunAlani: TByteField;
     MSQuery5urunKategori: TStringField;
     MSQuery5urunOzellik: TStringField;
+    Panel1: TPanel;
+    Button7: TButton;
+    Image1: TImage;
+    lbl_detailUrunAdi: TLabel;
+    gly_detailPics: TGlyph;
+    txt_detailOzellik: TText;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
-    procedure img_SepetimClick(Sender: TObject);
     procedure urunBirClick(Sender: TObject);
     procedure urunIkiClick(Sender: TObject);
     procedure urunUcClick(Sender: TObject);
@@ -235,6 +239,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_hesapAltCikisClick(Sender: TObject);
     procedure btn_sepetTamamlaClick(Sender: TObject);
+    procedure img_SideMenuClick(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -256,6 +262,7 @@ var
 implementation
 
 {$R *.fmx}
+
 {$R *.LgXhdpiPh.fmx ANDROID}
 
 
@@ -427,7 +434,25 @@ end;
 
 procedure TuAna.btn_urunBirDetailClick(Sender: TObject);
 begin
-   urunid := 0;
+
+   lbl_detailUrunAdi.Text := lbl_urunBirAdi.Text;
+
+   gly_detailPics.Images  := gly_urunBir.Images;
+   gly_detailPics.ImageIndex  := gly_urunBir.ImageIndex;
+
+   MSQuery1.Close;
+   MSQuery1.SQL.Clear;
+   MSQuery1.SQL.BeginUpdate;
+   MSQuery1.SQL.Add('SELECT * from urunler WHERE urunAdi=:urunAdi');
+   MSQuery1.SQL.EndUpdate;
+   MSQuery1.Params.ParamByName('urunAdi').Value := lbl_urunBirAdi.Text;
+   MSQuery1.Open;
+
+
+   txt_detailOzellik.Text := MSQuery1.Fields[2].AsString;
+
+
+
 end;
 
 procedure TuAna.btn_urunIkiDetailClick(Sender: TObject);
@@ -447,6 +472,7 @@ begin
    MSQuery3.SQL.EndUpdate;
    MSQuery3.Params.ParamByName('aktif').Value := '1';
    MSQuery3.Open;
+
 
 
    // sepetteki iki ürün de dolu ise uyarý verir.
@@ -486,6 +512,7 @@ begin
             MSQuery1.Params.ParamByName('urunKategori').Value := MSQuery3.Fields[1].Text;
             MSQuery1.Params.ParamByName('urunAdi').Value := lbl_SepetUrunBirAdi.Text;
             MSQuery1.Open;
+
 
 
             txt_urunBirDetail.Text := MSQuery1.Fields[2].AsString;
@@ -732,6 +759,19 @@ begin
 
 
 
+
+end;
+
+procedure TuAna.Button7Click(Sender: TObject);
+begin
+      if Panel1.Visible = True then
+ begin
+     Panel1.Visible := False;
+ end
+ else if Panel1.Visible = False then
+      begin
+           Panel1.Visible := True;
+      end;
 
 end;
 
@@ -1245,7 +1285,7 @@ begin
 
 
 
-
+       try
 
        MSQuery5.Close;
        MSQuery5.SQL.Clear;
@@ -1255,7 +1295,9 @@ begin
        MSQuery5.Params.ParamByName('kullaniciAdi').Value := edit_hesapOrtaNickname.Text;
        MSQuery5.Open;
 
+       except
 
+       end;
 
        // Eðer kullanýcýya ait iki kayýt varsa ;
 
@@ -1307,6 +1349,9 @@ begin
 
 
            // 2. sepet alaný kodlarý
+           try
+
+
 
            sepet_urunIki.Visible := true;
            MSQuery5.Close;
@@ -1317,6 +1362,9 @@ begin
            MSQuery5.Params.ParamByName('kullaniciAdi').Value := edit_hesapOrtaNickname.Text;
            MSQuery5.Open;
 
+           except
+
+           end;
 
            gly_sepetUrunIki.ImageIndex := MSQuery5.Fields[5].AsInteger;
            lbl_SepetUrunIkiAdi.Text := MSQuery5.Fields[0].AsString;
@@ -1691,15 +1739,10 @@ begin
 {$ENDIF}
 end;
 
-procedure TuAna.img_SepetimClick(Sender: TObject);
+procedure TuAna.img_SideMenuClick(Sender: TObject);
 begin
-     // Sol üstteki sepet resmine týkladýðýnda sepet sayfasýna yönlenmesi için;
-
- tabcontrol_Menu.TabIndex := 1;
-
 
 end;
-
 
 // KATEGORÝ CLÝCK EVENTLERÝ  ###
 
