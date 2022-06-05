@@ -95,7 +95,6 @@ type
     lo_urunAltiOrta: TLayout;
     lbl_urunAltiAdi: TLabel;
     gly_urunIki: TGlyph;
-    MSConnection1: TMSConnection;
     MSQuery1: TMSQuery;
     V: TVertScrollBox;
     kategoriBir: TRectangle;
@@ -197,12 +196,14 @@ type
     MSQuery5urunAlani: TByteField;
     MSQuery5urunKategori: TStringField;
     MSQuery5urunOzellik: TStringField;
-    Panel1: TPanel;
+    panel_Detail: TPanel;
     Button7: TButton;
     Image1: TImage;
     lbl_detailUrunAdi: TLabel;
     gly_detailPics: TGlyph;
     txt_detailOzellik: TText;
+    MSConnection1: TMSConnection;
+    btn_sepetSil: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -241,6 +242,7 @@ type
     procedure btn_sepetTamamlaClick(Sender: TObject);
     procedure img_SideMenuClick(Sender: TObject);
     procedure Button7Click(Sender: TObject);
+    procedure btn_sepetSilClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -457,7 +459,23 @@ end;
 
 procedure TuAna.btn_urunIkiDetailClick(Sender: TObject);
 begin
-     urunid := 1;
+     lbl_detailUrunAdi.Text := lbl_urunIkiAdi.Text;
+
+   gly_detailPics.Images  := gly_urunIki.Images;
+   gly_detailPics.ImageIndex  := gly_urunIki.ImageIndex;
+
+   MSQuery1.Close;
+   MSQuery1.SQL.Clear;
+   MSQuery1.SQL.BeginUpdate;
+   MSQuery1.SQL.Add('SELECT * from urunler WHERE urunAdi=:urunAdi');
+   MSQuery1.SQL.EndUpdate;
+   MSQuery1.Params.ParamByName('urunAdi').Value := lbl_urunIkiAdi.Text;
+   MSQuery1.Open;
+
+
+   txt_detailOzellik.Text := MSQuery1.Fields[2].AsString;
+
+
 end;
 
 procedure TuAna.btn_urunIkiSepetClick(Sender: TObject);
@@ -611,7 +629,23 @@ end;
 
 procedure TuAna.btn_urunUcDetailClick(Sender: TObject);
 begin
-     urunid := 2;
+        lbl_detailUrunAdi.Text := lbl_urunUcAdi.Text;
+
+   gly_detailPics.Images  := gly_urunUc.Images;
+   gly_detailPics.ImageIndex  := gly_urunUc.ImageIndex;
+
+   MSQuery1.Close;
+   MSQuery1.SQL.Clear;
+   MSQuery1.SQL.BeginUpdate;
+   MSQuery1.SQL.Add('SELECT * from urunler WHERE urunAdi=:urunAdi');
+   MSQuery1.SQL.EndUpdate;
+   MSQuery1.Params.ParamByName('urunAdi').Value := lbl_urunUcAdi.Text;
+   MSQuery1.Open;
+
+
+   txt_detailOzellik.Text := MSQuery1.Fields[2].AsString;
+
+
 end;
 
 procedure TuAna.btn_urunUcSepetClick(Sender: TObject);
@@ -764,20 +798,47 @@ end;
 
 procedure TuAna.Button7Click(Sender: TObject);
 begin
-      if Panel1.Visible = True then
- begin
-     Panel1.Visible := False;
- end
- else if Panel1.Visible = False then
-      begin
-           Panel1.Visible := True;
-      end;
+
+     // eðer kullanýcý ürünler ekranýnda dðeilse detail panelini açma !
+
+     if tabcontrol_Menu.TabIndex = 0 then
+     begin
+
+       if panel_Detail.Visible = True then
+           begin
+               panel_Detail.Visible := False;
+           end
+           else if panel_Detail.Visible = False then
+            begin
+                 panel_Detail.Visible := True;
+            end;
+
+     end;
 
 end;
 
+
+
+
 procedure TuAna.btn_urunDortDetailClick(Sender: TObject);
 begin
-     urunid := 3;
+        lbl_detailUrunAdi.Text := lbl_urunDortAdi.Text;
+
+   gly_detailPics.Images  := gly_urunDort.Images;
+   gly_detailPics.ImageIndex  := gly_urunDort.ImageIndex;
+
+   MSQuery1.Close;
+   MSQuery1.SQL.Clear;
+   MSQuery1.SQL.BeginUpdate;
+   MSQuery1.SQL.Add('SELECT * from urunler WHERE urunAdi=:urunAdi');
+   MSQuery1.SQL.EndUpdate;
+   MSQuery1.Params.ParamByName('urunAdi').Value := lbl_urunDortAdi.Text;
+   MSQuery1.Open;
+
+
+   txt_detailOzellik.Text := MSQuery1.Fields[2].AsString;
+
+
 end;
 
 procedure TuAna.btn_urunDortSepetClick(Sender: TObject);
@@ -928,7 +989,23 @@ end;
 
 procedure TuAna.btn_urunBesDetailClick(Sender: TObject);
 begin
-     urunid := 4;
+        lbl_detailUrunAdi.Text := lbl_urunBesAdi.Text;
+
+   gly_detailPics.Images  := gly_urunBes.Images;
+   gly_detailPics.ImageIndex  := gly_urunBes.ImageIndex;
+
+   MSQuery1.Close;
+   MSQuery1.SQL.Clear;
+   MSQuery1.SQL.BeginUpdate;
+   MSQuery1.SQL.Add('SELECT * from urunler WHERE urunAdi=:urunAdi');
+   MSQuery1.SQL.EndUpdate;
+   MSQuery1.Params.ParamByName('urunAdi').Value := lbl_urunBesAdi.Text;
+   MSQuery1.Open;
+
+
+   txt_detailOzellik.Text := MSQuery1.Fields[2].AsString;
+
+
 end;
 
 procedure TuAna.btn_urunBesSepetClick(Sender: TObject);
@@ -1079,7 +1156,23 @@ end;
 
 procedure TuAna.btn_urunAltiDetailClick(Sender: TObject);
 begin
-     urunid := 5;
+        lbl_detailUrunAdi.Text := lbl_urunAltiAdi.Text;
+
+   gly_detailPics.Images  := gly_urunAlti.Images;
+   gly_detailPics.ImageIndex  := gly_urunAlti.ImageIndex;
+
+   MSQuery1.Close;
+   MSQuery1.SQL.Clear;
+   MSQuery1.SQL.BeginUpdate;
+   MSQuery1.SQL.Add('SELECT * from urunler WHERE urunAdi=:urunAdi');
+   MSQuery1.SQL.EndUpdate;
+   MSQuery1.Params.ParamByName('urunAdi').Value := lbl_urunAltiAdi.Text;
+   MSQuery1.Open;
+
+
+   txt_detailOzellik.Text := MSQuery1.Fields[2].AsString;
+
+
 end;
 
 procedure TuAna.btn_urunAltiSepetClick(Sender: TObject);
@@ -1269,6 +1362,8 @@ begin
     begin
          // Eðer giriþ yapýldýysa ;
          sepet_AltPanel.Visible := true;
+         btn_hesapAltGiris.Visible := false;
+         btn_hesapAltKayit.Visible := false;
 
          MSQuery4.Close;
          MSQuery4.SQL.Clear;
@@ -1561,6 +1656,17 @@ end;
 
 
 
+
+procedure TuAna.btn_sepetSilClick(Sender: TObject);
+begin
+    MSQuery5.Close;
+        MSQuery5.SQL.Clear;
+        MSQuery5.SQL.BeginUpdate;
+        MSQuery5.SQL.Add('DELETE FROM sepet WHERE kullaniciAdi=:kullaniciAdi');
+        MSQuery5.SQL.EndUpdate;
+        MSQuery5.Params.ParamByName('kullaniciAdi').Value := edit_hesapOrtaNickname.Text;
+        MSQuery5.Execute;
+end;
 
 procedure TuAna.btn_sepetTamamlaClick(Sender: TObject);
 begin
