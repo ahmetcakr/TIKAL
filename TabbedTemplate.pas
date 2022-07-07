@@ -331,7 +331,7 @@ begin
           lbl_SepetUrunBirFiyat.Text := lbl_urunBirFiyat.Text;
           lbl_SepetUrunBirKatAdi.Text := 'Araba';
             ShowMessage('Eklendi.');
-            spin_urunBir.Value := spin_urunBir.Value + 1 ;
+            spin_urunBir.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -357,7 +357,7 @@ begin
          lbl_SepetUrunBirFiyat.Text := lbl_urunBirFiyat.Text;
          lbl_SepetUrunBirKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
-         spin_urunBir.Value := spin_urunBir.Value + 1 ;
+         spin_urunBir.Value :=  1 ;
 
          // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -388,7 +388,7 @@ begin
           lbl_SepetUrunIkiFiyat.Text := lbl_urunBirFiyat.Text;
           lbl_SepetUrunIkiKatAdi.Text := 'Araba';
           ShowMessage('Eklendi.');
-            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            spin_urunIki.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -413,7 +413,7 @@ begin
          lbl_SepetUrunIkiFiyat.Text := lbl_urunBirFiyat.Text;
          lbl_SepetUrunIkiKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
-            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            spin_urunIki.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -518,7 +518,7 @@ begin
           lbl_SepetUrunBirFiyat.Text := lbl_urunIkiFiyat.Text;
           lbl_SepetUrunBirKatAdi.Text := 'Araba';
             ShowMessage('Eklendi.');
-            spin_urunBir.Value := spin_urunBir.Value + 1;
+            spin_urunBir.Value := 1;
 
 
               // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
@@ -546,7 +546,7 @@ begin
          lbl_SepetUrunBirFiyat.Text := lbl_urunIkiFiyat.Text;
          lbl_SepetUrunBirKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
-         spin_urunBir.Value := spin_urunBir.Value + 1 ;
+         spin_urunBir.Value := 1 ;
 
          // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
 
@@ -579,7 +579,7 @@ begin
           lbl_SepetUrunIkiFiyat.Text := lbl_urunIkiFiyat.Text;
           lbl_SepetUrunIkiKatAdi.Text := 'Araba';
           ShowMessage('Eklendi.');
-            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            spin_urunIki.Value := 1 ;
 
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
@@ -605,7 +605,7 @@ begin
          lbl_SepetUrunIkiFiyat.Text := lbl_urunIkiFiyat.Text;
          lbl_SepetUrunIkiKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
-            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            spin_urunIki.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -690,7 +690,7 @@ begin
           lbl_SepetUrunBirFiyat.Text := lbl_urunUcFiyat.Text;
           lbl_SepetUrunBirKatAdi.Text := 'Araba';
             ShowMessage('Eklendi.');
-            spin_urunBir.Value := spin_urunBir.Value + 1 ;
+            spin_urunBir.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -717,7 +717,7 @@ begin
          lbl_SepetUrunBirFiyat.Text := lbl_urunUcFiyat.Text;
          lbl_SepetUrunBirKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
-         spin_urunBir.Value := spin_urunBir.Value + 1 ;
+         spin_urunBir.Value := 1 ;
 
          // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -747,7 +747,7 @@ begin
           lbl_SepetUrunIkiFiyat.Text := lbl_urunUcFiyat.Text;
           lbl_SepetUrunIkiKatAdi.Text := 'Araba';
           ShowMessage('Eklendi.');
-            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            spin_urunIki.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -772,7 +772,7 @@ begin
          lbl_SepetUrunIkiFiyat.Text := lbl_urunUcFiyat.Text;
          lbl_SepetUrunIkiKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
-            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            spin_urunIki.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -882,7 +882,7 @@ begin
           lbl_SepetUrunBirFiyat.Text := lbl_urunDortFiyat.Text;
           lbl_SepetUrunBirKatAdi.Text := 'Araba';
             ShowMessage('Eklendi.');
-            spin_urunBir.Value := spin_urunBir.Value + 1 ;
+            spin_urunBir.Value :=  1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -909,7 +909,7 @@ begin
          lbl_SepetUrunBirFiyat.Text := lbl_urunDortFiyat.Text;
          lbl_SepetUrunBirKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
-         spin_urunBir.Value := spin_urunBir.Value + 1 ;
+         spin_urunBir.Value := 1 ;
 
          // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -939,7 +939,7 @@ begin
           lbl_SepetUrunIkiFiyat.Text := lbl_urunDortFiyat.Text;
           lbl_SepetUrunIkiKatAdi.Text := 'Araba';
           ShowMessage('Eklendi.');
-            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            spin_urunIki.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -964,7 +964,7 @@ begin
          lbl_SepetUrunIkiFiyat.Text := lbl_urunDortFiyat.Text;
          lbl_SepetUrunIkiKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
-            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            spin_urunIki.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -1049,7 +1049,7 @@ begin
           lbl_SepetUrunBirFiyat.Text := lbl_urunBesFiyat.Text;
           lbl_SepetUrunBirKatAdi.Text := 'Araba';
             ShowMessage('Eklendi.');
-            spin_urunBir.Value := spin_urunBir.Value + 1 ;
+            spin_urunBir.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -1076,7 +1076,7 @@ begin
          lbl_SepetUrunBirFiyat.Text := lbl_urunBesFiyat.Text;
          lbl_SepetUrunBirKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
-         spin_urunBir.Value := spin_urunBir.Value + 1 ;
+         spin_urunBir.Value := 1 ;
 
          // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -1106,7 +1106,7 @@ begin
           lbl_SepetUrunIkiFiyat.Text := lbl_urunBesFiyat.Text;
           lbl_SepetUrunIkiKatAdi.Text := 'Araba';
           ShowMessage('Eklendi.');
-            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            spin_urunIki.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -1131,7 +1131,7 @@ begin
          lbl_SepetUrunIkiFiyat.Text := lbl_urunBesFiyat.Text;
          lbl_SepetUrunIkiKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
-            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            spin_urunIki.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -1216,7 +1216,7 @@ begin
           lbl_SepetUrunBirFiyat.Text := lbl_urunAltiFiyat.Text;
           lbl_SepetUrunBirKatAdi.Text := 'Araba';
             ShowMessage('Eklendi.');
-            spin_urunBir.Value := spin_urunBir.Value + 1 ;
+            spin_urunBir.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -1243,7 +1243,7 @@ begin
          lbl_SepetUrunBirFiyat.Text := lbl_urunAltiFiyat.Text;
          lbl_SepetUrunBirKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
-         spin_urunBir.Value := spin_urunBir.Value + 1 ;
+         spin_urunBir.Value := 1 ;
 
          // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -1273,7 +1273,7 @@ begin
           lbl_SepetUrunIkiFiyat.Text := lbl_urunAltiFiyat.Text;
           lbl_SepetUrunIkiKatAdi.Text := 'Araba';
           ShowMessage('Eklendi.');
-            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            spin_urunIki.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -1298,7 +1298,7 @@ begin
          lbl_SepetUrunIkiFiyat.Text := lbl_urunAltiFiyat.Text;
          lbl_SepetUrunIkiKatAdi.Text := 'Elektronik';
          ShowMessage('Eklendi.');
-            spin_urunIki.Value := spin_urunIki.Value + 1 ;
+            spin_urunIki.Value := 1 ;
 
             // Query1'i sepete eklenen ürünün kategori ve adýna göre filtreler
             MSQuery1.Close;
@@ -1659,13 +1659,21 @@ end;
 
 procedure TuAna.btn_sepetSilClick(Sender: TObject);
 begin
-    MSQuery5.Close;
+        MSQuery5.Close;
         MSQuery5.SQL.Clear;
         MSQuery5.SQL.BeginUpdate;
         MSQuery5.SQL.Add('DELETE FROM sepet WHERE kullaniciAdi=:kullaniciAdi');
         MSQuery5.SQL.EndUpdate;
         MSQuery5.Params.ParamByName('kullaniciAdi').Value := edit_hesapOrtaNickname.Text;
         MSQuery5.Execute;
+
+        sepet_urunBir.Visible := false;
+        sepet_urunIki.Visible := false;
+        gly_sepetUrunBir.Images := nil;
+        gly_sepetUrunIki.Images := nil;
+        sepetUrunBirFiyat := 0;
+        sepetUrunIkiFiyat := 0;
+        lbl_sepetToplamFiyat.Text := '0';
 end;
 
 procedure TuAna.btn_sepetTamamlaClick(Sender: TObject);
